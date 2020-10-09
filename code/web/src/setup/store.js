@@ -2,6 +2,7 @@
 import { compose, combineReducers } from 'redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import { composeWithDevTools } from "redux-devtools-extension";
 
 // App Imports
 import common from '../modules/common/api/state'
@@ -39,8 +40,8 @@ if (typeof window !== 'undefined') {
 export const store = createStore(
   rootReducer,
   initialState,
-
-  compose(
+// Add dev tools to project
+  composeWithDevTools(
     applyMiddleware(thunk),
   )
 )

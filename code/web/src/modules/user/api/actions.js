@@ -34,6 +34,7 @@ export function login(userCredentials, isLoading = true) {
     })
 
     return axios.post(routeApi, query({
+      // this is the query method from gql-query-builder not query from axios see the gql-query-builder docs here: https://github.com/atulmy/gql-query-builder
       operation: 'userLogin',
       variables: userCredentials,
       fields: ['user {name, email, role}', 'token']
@@ -108,6 +109,8 @@ export function logoutUnsetUserLocalStorageAndCookie() {
   cookie.remove('auth')
 }
 
+
+// I didn't see a place for user gender in the profile section maybe something we may want to add M/F/ rather not say
 // Get user gender
 export function getGenders() {
   return dispatch => {

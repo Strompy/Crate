@@ -28,3 +28,6 @@ export default {
     auth: true
   }
 }
+
+//List of user related paths I like this configuration much cleaner than adding directly into router. Keep this file for reference to routing techniques compare against from other files to home in on good routing practices.
+

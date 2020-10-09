@@ -62,7 +62,7 @@ class Signup extends Component {
         this.setState({
           isLoading: false
         })
-
+        
         if (response.data.errors && response.data.errors.length > 0) {
           this.props.messageShow(response.data.errors[0].message)
         } else {
@@ -160,7 +160,7 @@ class Signup extends Component {
                 style={{ marginTop: '1em' }}
               />
             </div>
-
+            {/* Depending on group design decision but could add more user detail at user sign up */}
             <div style={{ marginTop: '2em' }}>
               {/* Login link */}
               <Link to={userRoutes.login.path}>

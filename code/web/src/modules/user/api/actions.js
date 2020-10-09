@@ -38,8 +38,8 @@ export function login(userCredentials, isLoading = true) {
 
     //Uses axios library to make a request to the back-end; first argument is the routeApi, second is the query made to the database
     //the query targets the 'userLogin' operation to read data 
-    //variables value will be the user object 
-    //fields relates to the fields that are needed for authentication in back-end?
+    //variables value is accepted as variable within the operation to get specific info for that particular user  
+    //fields relates to the fields that are being requested/get returned 
     //Overall, this request is looking to see if the user exists in the database 
     return axios.post(routeApi, query({
       operation: 'userLogin',
@@ -83,7 +83,7 @@ export function login(userCredentials, isLoading = true) {
 
 // Set user token and info in localStorage and cookie
 export function loginSetUserLocalStorageAndCookie(token, user) {
-  // Update token
+  // Sets items in local storage for token and user, to avoid having to log in again every time the site is revisited 
   window.localStorage.setItem('token', token)
   window.localStorage.setItem('user', JSON.stringify(user))
 
@@ -94,6 +94,9 @@ export function loginSetUserLocalStorageAndCookie(token, user) {
 // Register a user
 export function register(userDetails) {
   return dispatch => {
+    //makes an axios post request to add new user to server
+    //targets userSignup operation passing in the variables provided
+    //adds id, name, email info to database
     return axios.post(routeApi, mutation({
       operation: 'userSignup',
       variables: userDetails,
@@ -105,8 +108,10 @@ export function register(userDetails) {
 // Log out user and remove token from localStorage
 export function logout() {
   return dispatch => {
+    //remove user info from local storage & cookies
     logoutUnsetUserLocalStorageAndCookie()
 
+    //dispatch action, which ultimately resets user info in store 
     dispatch({
       type: LOGOUT
     })
@@ -115,7 +120,7 @@ export function logout() {
 
 // Unset user token and info in localStorage and cookie
 export function logoutUnsetUserLocalStorageAndCookie() {
-  // Remove token
+  // Remove token & user info from local storage 
   window.localStorage.removeItem('token')
   window.localStorage.removeItem('user')
 
@@ -126,6 +131,8 @@ export function logoutUnsetUserLocalStorageAndCookie() {
 // Get user gender
 export function getGenders() {
   return dispatch => {
+    //makes query to database for userGenders operation to get back available genders?
+    //returns id & gender name fields?  
     return axios.post(routeApi, query({
       operation: 'userGenders',
       fields: ['id', 'name']

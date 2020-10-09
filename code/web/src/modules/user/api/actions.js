@@ -48,6 +48,13 @@ export function login(userCredentials, isLoading = true) {
     }))
 
       .then(response => {
+        //response is object - access data.data & get something like the following:
+        // { userLogin: 
+        //   { 
+            // token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", 
+        //     user: { name: "Rachel Williams", email:      "rachelwilliams659@gmail.com", role: null } 
+       //     }
+       // }
         let error = ''
 
         //if response contains an error, set the user error to be that message

@@ -3,19 +3,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-// UI Imports
+// UI Imports for styling 
 import Card from '../../ui/card/Card'
 import H4 from '../../ui/typography/H4'
 import { white, grey2, black } from '../../ui/common/colors'
 
-// App Imports
+// App Imports for routeImage (process.env.APP_URL_API) & route object of objects detailing route info
 import { routeImage, routes } from '../../setup/routes'
 
-// Component
+// Component for Product item
+//Gets prop for product object; destructures name, slug, desc, image
 const Item = (props) => {
 
   const { name, slug, description, image } = props.product
 
+  //returns a Card wrapped in a Link to the product's detail page url 
+  //Card contains img, name, desc of product 
   return (
     <Link to={routes.product.path(slug)}>
       <Card style={{ width: '25em', margin: '2.5em auto', backgroundColor: white }}>

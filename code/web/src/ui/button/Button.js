@@ -7,7 +7,9 @@ import { white, grey2, black, primary, secondary } from '../common/colors'
 import { primary as primaryGradient, secondary as secondaryGradient } from '../common/gradients'
 import { level1, level2, level3, level4 } from '../common/shadows'
 
-// Component
+// Component that is like a template for a button that can be re-used throughout
+//must have type, disabled, and theme props; can accept other addtl props as well
+//can use storybook button.js to visualize the different button themes/combinations
 const Button = (props) => {
   const { children, type, disabled, theme, ...other } = props
 
@@ -15,7 +17,7 @@ const Button = (props) => {
     <button type={type} disabled={disabled} {...other}>
       {children}
 
-      {/* language=CSS */}
+      {/* language=CSS - all styling gets applied to the button*/}
       <style jsx>{`
         button {
           padding: 0.7em 1.7em;

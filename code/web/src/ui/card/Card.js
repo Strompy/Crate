@@ -4,7 +4,9 @@ import React from 'react'
 // UI Imports
 import { level1 } from '../common/shadows'
 
-// Component
+//Component that is like a template for a Card
+//can reference card.js in storybook to see example UI of card 
+//no props are required; can just return a div with the styling specified
 const Card = (props) => {
   const { children, ...other } = props
 

@@ -1,4 +1,5 @@
-// App Imports for helper function to check if object is empty, as well as all relevant actions that could be dispatched to reducer 
+// App Imports for helper function to check if object is empty, as well as all relevant action types
+//Each of action types imported below actually has 'AUTH/' added to beginning of string 
 import { isEmpty } from '../../../setup/helpers'
 import { SET_USER, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT } from './actions'
 

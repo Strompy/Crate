@@ -5,10 +5,12 @@ import PropTypes from 'prop-types'
 // UI Imports
 import { grey2, grey4, black } from '../common/colors'
 
-// Component
+// Component for TextArea Input
+//Props optional
 const Textarea = (props) => {
   const { children, fullWidth, ...other } = props
 
+  //returns a textarea element, styled as specified on line 18 based on props
   return (
     <span>
       <textarea {...other}>{children}</textarea>

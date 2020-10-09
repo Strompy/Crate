@@ -5,10 +5,12 @@ import PropTypes from 'prop-types'
 // UI Imports
 import { grey2, grey4, black } from '../common/colors'
 
-// Component
+// Component for any single-line Input field
+//All props optional
 const Input = (props) => {
   const { type, fullWidth, ...other } = props
 
+  //returns a div with an input field, styled as specified on line 19
   return (
     <div>
       <input type={type} {...other} />

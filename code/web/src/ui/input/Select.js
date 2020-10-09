@@ -5,10 +5,13 @@ import PropTypes from 'prop-types'
 // UI Imports
 import { grey2, grey4, black } from '../common/colors'
 
-// Component
+// Component for a Select input field (dropdown)
+//All props optional
 const Input = (props) => {
   const { children, fullWidth, ...other } = props
 
+  //returns a div with a select input element
+  //children should probably be the option elements when this is used 
   return (
     <div>
       <select {...other}>{children}</select>

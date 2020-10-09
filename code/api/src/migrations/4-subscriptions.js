@@ -47,3 +47,4 @@ module.exports = {
 
 // more relationships might need to be added to subscriptions depending on how deliveries are handled
 // strong reminicience to RoR shouldnt make forming relational DB tables too hard
+// potentially, subscriptions could act as a joins between products and crates. 

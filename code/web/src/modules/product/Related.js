@@ -40,7 +40,7 @@ class Related extends PureComponent {
           {
             isLoading
               ? <Loading />
-              : list.length > 0
+              : list && list.length > 0
                 ? list.map(product => (
                     <GridCell key={product.id} style={{ textAlign: 'center' }}>
                       <ProductItem product={product}/>

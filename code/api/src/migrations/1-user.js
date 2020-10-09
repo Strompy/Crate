@@ -1,5 +1,5 @@
 module.exports = {
-  // 'up' action. What is run when file is migrated. 
+  // 'up' action. What is run when file is migrated.
   up: (queryInterface, Sequelize) => {
     // name of migration specified as 'createTable'
     // adding or updating tables woudl require different names.
@@ -21,6 +21,10 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      // this is where we could add attributes like image, description, and shipping address to the user model
+      // those values should be established with a type, allowNull, and a default
+      // allowNull should be true
+      // default should be null/nil 
       email: {
         type: Sequelize.TEXT
       },

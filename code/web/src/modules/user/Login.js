@@ -2,10 +2,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+//https://react-redux.js.org/api/connect
 import { Link, withRouter } from 'react-router-dom'
+// withRouter knowledge: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/withRouter.md
 import { Helmet } from 'react-helmet'
+// https://github.com/nfl/react-helmet#readme
 
 // UI Imports
+// All related to storybook npm run storybook in directory for a visual representation of all ui elements
 import { Grid, GridCell } from '../../ui/grid'
 import Button from '../../ui/button'
 import ImageTile from '../../ui/image/Tile'
@@ -46,6 +50,7 @@ class Login extends Component {
       user
     })
   }
+  // updates state to whats being typed in on form
 
   onSubmit = (event) => {
     event.preventDefault()
@@ -72,14 +77,17 @@ class Login extends Component {
         }, 5000)
       })
   }
+  // submits form will display messageShow with an error if something doesn't go to plan, no email reg., wrong passwork, etc ...
 
   render() {
     const { isLoading, error } = this.props.user
 
     return (
+      // sets grid per storybook
       <Grid gutter={true} alignCenter={true} style={{ padding: '2em' }}>
         {/* SEO */}
         <Helmet>
+        {/* changes title on browser tab pretty cool */}
           <title>Login to your account - Crate</title>
         </Helmet>
 
@@ -107,6 +115,8 @@ class Login extends Component {
           </Grid>
         </GridCell>
 
+
+{/* Input Form layout and types, styling from storybook */}
         {/* Right Content */}
         <GridCell style={{ textAlign: 'center' }}>
           <H3 font="secondary" style={{ marginBottom: '1em' }}>Login to your account</H3>
@@ -154,7 +164,9 @@ class Login extends Component {
         </GridCell>
 
         {/* Auth Check */}
-        <AuthCheck/>
+        {/* As says checks the user login data from api call*/}
+        <AuthCheck/> 
+        {/* code/web/src/modules/auth/AuthCheck.js*/}
       </Grid>
     )
   }
@@ -168,7 +180,21 @@ Login.propTypes = {
   messageHide: PropTypes.func.isRequired
 }
 
+/*state from MSTP
+user {
+  details { 
+    email: "user@crate.com", 
+    name: "The User",
+    role: "USER"
+  }
+  error: "",
+  isAuthenticated: true,
+  isLoading: false
+}
+*/
+
 // Component State
+// MSTP
 function loginState(state) {
   return {
     user: state.user

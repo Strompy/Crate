@@ -2,7 +2,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// Component
+// GridCell styling Component
+//accepts optional props that are booleans besides children/others
 const GridCell = (props) => {
   const {
     children,
@@ -15,6 +16,7 @@ const GridCell = (props) => {
     ...others
   } = props
 
+  //returns a div representing an individual GridCell, styled as specified on line 25 based on props 
   return (
     <div {...others}>
       {children}

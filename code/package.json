@@ -23,7 +23,11 @@
     "url": "https://github.com/atulmy/crate/issues"
   },
   "homepage": "https://github.com/atulmy/crate#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addons": "^6.0.26",
+    "@storybook/react": "^6.0.26"
+  },
   "devDependencies": {
     "concurrently": "^4.1.0"
   }

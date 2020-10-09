@@ -8,15 +8,18 @@ import { primary, secondary } from "../common/gradients"
 import { level1, level2, level3, level4 } from "../common/shadows"
 import Icon from '../icon'
 
-// Component
+// Component template for a File Upload Input 
+//Require props: text, name, style; others optional
 const File = (props) => {
   const { text, style, name, ...other } = props
 
+  //returns a div with label & input field, styled as specified on line 32
   return (
     <div>
       <div className="file-upload" style={style}>
         <label htmlFor={`file-upload-${ name }`} className="file-upload__label"><Icon
           size={1.2}>file_upload</Icon> {text}</label>
+        {/* This input type automatically brings up option to choose file from your computer */}
         <input
           className="file-upload__input"
           type="file"

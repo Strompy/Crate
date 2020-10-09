@@ -2,10 +2,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// Component
+// Component for Styled Icon
+//accepts optional props
 const Icon = (props) => {
   const { children, size, ...other } = props
 
+  //returns an icon with styling specified on line 16
+  //className material-icons styling does not appear to be defined
   return (
     <i className="material-icons" {...other}>
       {children}

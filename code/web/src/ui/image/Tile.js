@@ -2,10 +2,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// Component
+// Styling Component for Image Tile
+//image prop is required, others are optional
 const Tile = (props) => {
   const { children, image, width, height, style, shadow, ...others } = props
 
+  //returns a div filled with an image, with styling specified in lines 11 & 15
   return (
     <div style={Object.assign({ height, width }, style)} {...others}>
       {children}

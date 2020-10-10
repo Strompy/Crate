@@ -9,6 +9,7 @@ const models = {
   Product: databaseConnection.import('../modules/product/model'),
   Crate: databaseConnection.import('../modules/crate/model'),
   Subscription: databaseConnection.import('../modules/subscription/model')
+  // any additional models need to be connected to the database here
 }
 
 Object.keys(models).forEach(modelName => {

@@ -2,13 +2,14 @@
 import models from '../../setup/models'
 import params from '../../config/params'
 
+//  Queries section
 // Get crate by ID
 export async function getById(parentValue, { crateId }) {
   const crate = await models.Crate.findOne({ where: { id: crateId } })
 
   if (!crate) {
-    // Crate does not exists
-    throw new Error('The crate you are looking for does not exists or has been discontinued.')
+    // Crate does not exist
+    throw new Error('The crate you are looking for does not exist or has been discontinued.')
   } else {
     return crate
   }
@@ -17,11 +18,15 @@ export async function getById(parentValue, { crateId }) {
 // Get all crates
 export async function getAll(parentValue, { orderBy }) {
   return await models.Crate.findAll({ order: [['id', orderBy]] })
+  // why nested array in order value?
 }
 
+// Mutations Section
+// No sad path for bad crate id?
 // Create crate
 export async function create(parentValue, { name, description }, { auth }) {
   if(auth.user && auth.user.role === params.user.roles.admin) {
+    // checks if user is authenticated and an admin role
     return await models.Crate.create({
       name,
       description
@@ -34,11 +39,14 @@ export async function create(parentValue, { name, description }, { auth }) {
 // Update crate
 export async function update(parentValue, { id, name, description }, { auth }) {
   if(auth.user && auth.user.role === params.user.roles.admin) {
+    // checks if user is authenticated and an admin role
     return await models.Crate.update(
       {
+        // data to update
         name,
         description
       },
+      // which crate to update
       {where: {id}}
     )
   } else {
@@ -49,6 +57,7 @@ export async function update(parentValue, { id, name, description }, { auth }) {
 // Delete crate
 export async function remove(parentValue, { id }, { auth }) {
   if(auth.user && auth.user.role === params.user.roles.admin) {
+    // checks if user is authenticated and an admin role
     return await models.Crate.destroy({where: {id}})
   } else {
     throw new Error('Operation denied.')

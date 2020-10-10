@@ -1,3 +1,5 @@
+// Creates GraphQLSchema
+
 // Imports
 import { GraphQLSchema } from 'graphql'
 

@@ -17,6 +17,7 @@ const query = new GraphQLObjectType({
     ...product,
     ...crate,
     ...subscription
+    // sets  query fields based on the imported functions. ... = spread into an array?
   })
 })
 

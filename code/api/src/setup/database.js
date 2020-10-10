@@ -7,11 +7,14 @@ import databaseConfig from '../config/database.json'
 
 // Load database config
 const databaseConfigEnv = databaseConfig[NODE_ENV]
+// NODE_ENV = development
 
 // Create new database connection
 const connection = new Sequelize(databaseConfigEnv.database, databaseConfigEnv.username, databaseConfigEnv.password, {
   host: databaseConfigEnv.host,
+  // "127.0.0.1"
   dialect: databaseConfigEnv.dialect,
+  // "postgres"
   logging: false
 })
 

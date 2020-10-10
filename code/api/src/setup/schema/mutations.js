@@ -6,6 +6,7 @@ import * as user from '../../modules/user/mutations'
 import * as product from '../../modules/product/mutations'
 import * as crate from '../../modules/crate/mutations'
 import * as subscription from '../../modules/subscription/mutations'
+// any added models will need to be imported here
 
 // Mutation
 const mutation = new GraphQLObjectType({
@@ -17,6 +18,7 @@ const mutation = new GraphQLObjectType({
     ...product,
     ...crate,
     ...subscription
+    // and included here
   }
 })
 

@@ -6,6 +6,7 @@ import * as user from '../../modules/user/query'
 import * as product from '../../modules/product/query'
 import * as crate from '../../modules/crate/query'
 import * as subscription from '../../modules/subscription/query'
+// any new models WITH queries need to be added here
 
 // Query
 const query = new GraphQLObjectType({
@@ -17,6 +18,7 @@ const query = new GraphQLObjectType({
     ...product,
     ...crate,
     ...subscription
+    // and included here.
   })
 })
 

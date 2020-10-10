@@ -1,3 +1,6 @@
+// Joins table between user and crate - aka UserCrates table
+// Subscription belongs to user
+// Subscription belongs to crate
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('subscriptions', {
@@ -8,6 +11,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
+        // foreign key for the User this belongs to
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -16,6 +20,7 @@ module.exports = {
         allowNull: false
       },
       crateId: {
+        // foreign key for the crate this belongs to
         type: Sequelize.INTEGER,
         references: {
           model: 'crates',

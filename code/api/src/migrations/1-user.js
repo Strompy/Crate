@@ -1,3 +1,5 @@
+// User has many subscriptions
+// User has many crates through subscriptions
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users', {

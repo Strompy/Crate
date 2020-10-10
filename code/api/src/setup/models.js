@@ -10,12 +10,14 @@ const models = {
   Crate: databaseConnection.import('../modules/crate/model'),
   Subscription: databaseConnection.import('../modules/subscription/model')
 }
+// defines models using the model modules
 
 Object.keys(models).forEach(modelName => {
   if (models[modelName].associate) {
     models[modelName].associate(models)
   }
 })
+// adds model relationships per model if association exists
 
 models.sequelize = databaseConnection
 models.Sequelize = Sequelize

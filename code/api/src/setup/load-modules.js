@@ -1,10 +1,15 @@
 // Imports
 import express from 'express'
 import path from 'path'
+// The path module provides utilities for working with file and directory paths.
 import cors from 'cors'
+// cross-origin resource sharing, helps front and back work together
 import bodyParser from 'body-parser'
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 import cookieParser from 'cookie-parser'
+// Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
 import morgan from 'morgan'
+// HTTP request logger middleware for node.js
 
 // App Imports
 import { NODE_ENV } from '../config/env'

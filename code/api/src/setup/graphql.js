@@ -12,15 +12,18 @@ export default function (server) {
 
   server.use(authentication)
 
-  // API (GraphQL on route `/`)
+  // API (GraphQL endpoint on route `/`)
   server.use(serverConfig.graphql.endpoint, graphqlHTTP(request => ({
     schema,
     graphiql: serverConfig.graphql.ide,
+    // graphiql set to true
     pretty: serverConfig.graphql.pretty,
+    // pretty print set to true
     context: {
       auth: {
         user: request.user,
         isAuthenticated: request.user && request.user.id > 0
+        // checking is user exists and id is legit?
       }
     }
   })))

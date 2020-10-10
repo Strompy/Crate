@@ -10,6 +10,7 @@ export default function (request, response, next) {
     try {
       const token = authToken.split(' ')
       request.user = jwt.verify(token[1], serverConfig.secret)
+      // secret = api key
     } catch (e) {
       console.warn('Invalid token detected.')
     }

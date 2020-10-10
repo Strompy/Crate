@@ -1,9 +1,13 @@
 'use strict';
+// The purpose of "use strict" is to indicate that the code should be executed in "strict mode".
+// With strict mode, you can not, for example, use undeclared variables.
 
 const params = require('../config/params');
+// Used here to get product types and genders
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
+    // queryInterface is a Sequelize function used to interface with the DB
     return queryInterface.bulkInsert('products', [
       {
         name: 'Belt for Women',

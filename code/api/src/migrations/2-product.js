@@ -3,9 +3,13 @@ module.exports = {
     return queryInterface.createTable('products', {
       id: {
         allowNull: false,
+        // requires id field
         autoIncrement: true,
+        // each id is ++ the last entry
         primaryKey: true,
+        // primary key/identifier for this table
         type: Sequelize.INTEGER
+        // Sequelize is a promise-based ORM for Node, this is setting the data type for the column
       },
       name: {
         type: Sequelize.STRING

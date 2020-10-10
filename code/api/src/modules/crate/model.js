@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT
     }
   })
-
+  // establishes a one to many relationship between a crate and it's subscriptions
   Crate.associate = function(models) {
     Crate.hasMany(models.Subscription)
   }

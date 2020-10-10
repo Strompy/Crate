@@ -26,6 +26,8 @@ export function setUser(token, user) {
 }
 
 // Login a user using credentials
+// * User login dont think we need to update fields but do need to add role to new user doesnt seem to put in role on sign up only if using the seed accounts in:
+// * code/api/src/seeders/1-user.js
 export function login(userCredentials, isLoading = true) {
   return dispatch => {
     dispatch({
@@ -34,7 +36,9 @@ export function login(userCredentials, isLoading = true) {
     })
 
     return axios.post(routeApi, query({
-      // this is the query method from gql-query-builder not query from axios see the gql-query-builder docs here: https://github.com/atulmy/gql-query-builder
+      /* this is the query method from gql-query-builder not query from axios see the gql-query-builder docs here: 
+      * https://github.com/atulmy/gql-query-builder
+      */
       operation: 'userLogin',
       variables: userCredentials,
       fields: ['user {name, email, role}', 'token']
@@ -68,6 +72,7 @@ export function login(userCredentials, isLoading = true) {
 }
 
 // Set user token and info in localStorage and cookie
+// * Sets and updates user token in LocalStorgage
 export function loginSetUserLocalStorageAndCookie(token, user) {
   // Update token
   window.localStorage.setItem('token', token)
@@ -78,6 +83,8 @@ export function loginSetUserLocalStorageAndCookie(token, user) {
 }
 
 // Register a user
+// * Might be able add role in the register field and possible a gender option if needed we have functions relating to gender but haven't seen used just yet.
+
 export function register(userDetails) {
   return dispatch => {
     return axios.post(routeApi, mutation({
@@ -100,6 +107,7 @@ export function logout() {
 }
 
 // Unset user token and info in localStorage and cookie
+//* Removes LS user token and cookie for auth
 export function logoutUnsetUserLocalStorageAndCookie() {
   // Remove token
   window.localStorage.removeItem('token')
@@ -110,7 +118,7 @@ export function logoutUnsetUserLocalStorageAndCookie() {
 }
 
 
-// I didn't see a place for user gender in the profile section maybe something we may want to add M/F/ rather not say
+// * I didn't see a place for user gender in the profile section maybe something we may want to add M/F/ rather not say
 // Get user gender
 export function getGenders() {
   return dispatch => {

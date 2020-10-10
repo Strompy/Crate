@@ -16,18 +16,15 @@
       "admin": "ADMIN",
       "user": "USER"
     },
-    "gender": {  // since gender is an integer value (1 or 2)
-      "male": {  // this parameter establishes the association between an integer value and a gender.
-        "id": 1, // in this case 1 is
-        "name": "Male" // associatied to Male
+    "gender": {
+      "male": {
+        "id": 1,
+        "name": "Male"
       },
       "female": {
-        "id": 2,  // and 2 is assoicatied to
-        "name": "Female" // female
+        "id": 2,
+        "name": "Female"
       }
     }
   }
 }
-
-// configuration file for any static enums.
-// If any enum values are added, the enums should be configured in this file.

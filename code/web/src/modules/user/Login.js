@@ -50,7 +50,7 @@ class Login extends Component {
       user
     })
   }
-  // updates state to whats being typed in on form
+  // updates state to whats being typed in from controlled form
 
   onSubmit = (event) => {
     event.preventDefault()
@@ -180,21 +180,22 @@ Login.propTypes = {
   messageHide: PropTypes.func.isRequired
 }
 
-/*state from MSTP
-user {
-  details { 
-    email: "user@crate.com", 
-    name: "The User",
-    role: "USER"
-  }
-  error: "",
-  isAuthenticated: true,
-  isLoading: false
-}
+/*
+*state
+!   user {
+!     details { 
+*       email: "user@crate.com", 
+*       name: "The User",
+*       role: "USER"
+!     }
+*     error: "",
+*     isAuthenticated: true,
+*     isLoading: false
+!   }
 */
 
 // Component State
-// MSTP
+// * loginState === MSTP
 function loginState(state) {
   return {
     user: state.user

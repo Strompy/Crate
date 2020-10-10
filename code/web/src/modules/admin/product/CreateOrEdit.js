@@ -316,6 +316,7 @@ class CreateOrEdit extends Component {
                   </div>
 
                   {/* Uploaded image */}
+                  {/* May be able to use this or an altered rendition  of this function for user profile picture  */}
                   {renderIf(this.state.product.image !== '', () => (
                     <img src={routeImage + this.state.product.image} alt="Product Image"
                          style={{ width: 200, marginTop: '1em' }}/>

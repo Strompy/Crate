@@ -10,6 +10,7 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
+    // add image, description, and shipping address fields here-- type: GraphQLString 
     password: { type: GraphQLString },
     role: { type: GraphQLString },
     createdAt: { type: GraphQLString },

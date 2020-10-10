@@ -8,6 +8,8 @@ import params from '../../config/params'
 import models from '../../setup/models'
 
 // Create
+// upon user creation shipping address should be a required field
+// { name, email, shipping address, password }
 export async function create(parentValue, { name, email, password }) {
   // Users exists with same email check
   const user = await models.User.findOne({ where: { email } })
@@ -19,6 +21,7 @@ export async function create(parentValue, { name, email, password }) {
     return await models.User.create({
       name,
       email,
+      // shippingAddress
       password: passwordHashed
     })
   } else {

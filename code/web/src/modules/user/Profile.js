@@ -1,9 +1,9 @@
 // Imports
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Helmet } from 'react-helmet'
-import { Link } from 'react-router-dom'
+import React from 'react' // allows us to use JSX & react components in this file <---
+import PropTypes from 'prop-types' // makes sure that props are being passed to component as expected <---
+import { connect } from 'react-redux' // connects component to redux store <---
+import { Helmet } from 'react-helmet' // manages changes to the document head (metadata) <---
+import { Link } from 'react-router-dom' // Link turns an element into a link for React-Router <---
 
 // UI Imports
 import { Grid, GridCell } from '../../ui/grid'

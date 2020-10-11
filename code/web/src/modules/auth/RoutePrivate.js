@@ -24,6 +24,20 @@ RoutePrivate.propTypes = {
 }
 
 // Component State
+//* routePrivateState === MSTP
+/*
+*state
+!   user {
+!     details { 
+*       email: "user@crate.com", 
+*       name: "The User",
+*       role: "USER"
+!     }
+*     error: "",
+*     isAuthenticated: true,
+*     isLoading: false
+!   }
+*/
 function routePrivateState(state) {
   return {
     user: state.user

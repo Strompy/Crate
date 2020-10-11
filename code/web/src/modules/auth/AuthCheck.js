@@ -19,6 +19,19 @@ AuthCheck.propTypes = {
 }
 
 // Component State
+/*
+*state
+!   user {
+!     details { 
+*       email: "user@crate.com", 
+*       name: "The User",
+*       role: "USER"
+!     }
+*     error: "",
+*     isAuthenticated: true,
+*     isLoading: false
+!   }
+*/
 function authCheckState(state) {
   return {
     user: state.user

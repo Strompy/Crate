@@ -8,7 +8,7 @@ import { grey2, grey4, black } from '../common/colors'
 // Component
 const Textarea = (props) => {
   const { children, fullWidth, ...other } = props
-
+//* We should be able to use this for our user details input text area from storybook
   return (
     <span>
       <textarea {...other}>{children}</textarea>

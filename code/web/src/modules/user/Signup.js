@@ -123,6 +123,7 @@ class Signup extends Component {
           <H3 font="secondary" style={{ marginBottom: '1em' }}>Create an account</H3>
 
           {/* Signup Form */}
+          {/* We could update user data on signup or we can create another form after a user is signed up that we can add more user details */}
           <form onSubmit={this.onSubmit}>
             <div style={{ width: '25em', margin: '0 auto' }}>
               {/* Name */}
@@ -190,4 +191,6 @@ Signup.propTypes = {
   messageHide: PropTypes.func.isRequired
 }
 
+
+//* No MSTP 
 export default connect(null, { register, messageShow, messageHide })(withRouter(Signup))

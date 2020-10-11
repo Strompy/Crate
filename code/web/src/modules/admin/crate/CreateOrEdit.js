@@ -111,7 +111,7 @@ class CreateOrEdit extends Component {
         }, 5000)
       })
   }
-
+//* Admin is able to create new crates, we may be able to utilize some functionality or copy some functionality from this to update or crates to be easier for us to use.
   render() {
     return (
       <div>

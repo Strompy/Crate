@@ -1,7 +1,10 @@
 // Imports
 import axios from 'axios'
+//* https://github.com/axios/axios
 import { query, mutation } from 'gql-query-builder'
+//* https://github.com/atulmy/gql-query-builder
 import cookie from 'js-cookie'
+//* https://github.com/js-cookie/js-cookie
 
 // App Imports
 import { routeApi } from '../../../setup/routes'

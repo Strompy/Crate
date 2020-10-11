@@ -27,7 +27,7 @@ class Subscriptions extends PureComponent {
   componentDidMount() {
     this.props.getListByUser()
   }
-
+//* Based on talks with the team we will be adding a bit more data to the subscriptions to be able to update a date and be able to create a history of subscriptions.
   render() {
     return (
       <div>

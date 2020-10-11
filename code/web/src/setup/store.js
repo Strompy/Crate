@@ -1,7 +1,8 @@
 // Imports
-import { compose, combineReducers } from 'redux'
+import { compose, combineReducers } from 'redux' // what is compose? <---
 import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk' // what is redux-thunk? <---
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 // App Imports
 import common from '../modules/common/api/state'
@@ -11,7 +12,7 @@ import * as subscription from '../modules/subscription/api/state'
 import * as crate from '../modules/crate/api/state'
 
 // App Reducer
-const appReducer = combineReducers({
+const appReducer = combineReducers({ // interesting way to use combineReducers <---
   common,
   user,
   ...product,
@@ -20,7 +21,7 @@ const appReducer = combineReducers({
 })
 
 // Root Reducer
-export const rootReducer = (state, action) => {
+export const rootReducer = (state, action) => { // this is rootReducer <---
   if (action.type === 'RESET') {
     state = undefined
   }
@@ -36,11 +37,11 @@ if (typeof window !== 'undefined') {
 }
 
 // Store
-export const store = createStore(
+export const store = createStore( // store gets exported into ./client/index.js, to be loaded into Provider <---
   rootReducer,
   initialState,
 
-  compose(
-    applyMiddleware(thunk),
+  composeWithDevTools(
+    applyMiddleware(thunk), // look into thunk <---
   )
 )

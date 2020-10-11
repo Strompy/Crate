@@ -88,11 +88,11 @@ export function register(userDetails) {
 }
 
 // Log out user and remove token from localStorage
-export function logout() {
+export function logout() { // Like explained above, this calls a method that removes entries in localStorage for 'token' & 'user' and removes 'auth' from cookies as well as creating the LOGOUT action. <--
   return dispatch => {
     logoutUnsetUserLocalStorageAndCookie()
 
-    dispatch({
+    dispatch({ // This is an action that is dispatched to the reducer in ./state.js that sets error, isLoading, isAuthenticated, and details (all contents of 'user' state) to falsey values. <--
       type: LOGOUT
     })
   }

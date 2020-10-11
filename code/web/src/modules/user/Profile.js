@@ -6,20 +6,21 @@ import { Helmet } from 'react-helmet' // manages changes to the document head (m
 import { Link } from 'react-router-dom' // Link turns an element into a link for React-Router <---
 
 // UI Imports
-import { Grid, GridCell } from '../../ui/grid'
-import { H3, H4 } from '../../ui/typography'
-import Button from '../../ui/button'
-import { grey, grey2 } from '../../ui/common/colors'
+import { Grid, GridCell } from '../../ui/grid' // Theses are components that give elements flex styling <---
+import { H3, H4 } from '../../ui/typography'// Imports conditional styling components for H1 and H2 <---
+import Button from '../../ui/button' // Imports Button component with conditional styling <---
+import { grey, grey2 } from '../../ui/common/colors' // Imports color variables from colors sheet <---
 
 // App Imports
-import userRoutes from '../../setup/routes/user'
-import { logout } from './api/actions'
+import userRoutes from '../../setup/routes/user' // Imports userRoutes object to be used with Link component to route to Subscriptions <---
+import { logout } from './api/actions' // imports method (action creator) to reset contents of 'user' state to falsey values. <---
 
 // Component
 const Profile = (props) => (
   <div>
     {/* SEO */}
     <Helmet>
+      {/* Changes title in html head to 'My Profile - Crate' */}
       <title>My Profile - Crate</title>
     </Helmet>
 
@@ -53,10 +54,10 @@ Profile.propTypes = {
 }
 
 // Component State
-function profileState(state) {
+function profileState(state) { // method to connect 'user' state. AKA mapStateToProps() <---
   return {
     user: state.user
   }
 }
 
-export default connect(profileState, { logout })(Profile)
+export default connect(profileState, { logout })(Profile) // connects 'user' state and dispatches logout action creator to props

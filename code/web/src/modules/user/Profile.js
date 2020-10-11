@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet' // manages changes to the document head (m
 import { Link } from 'react-router-dom' // Link turns an element into a link for React-Router <---
 
 // UI Imports
-import { Grid, GridCell } from '../../ui/grid' // Theses are style components that give elements flex-based grid styling <---
+import { Grid, GridCell } from '../../ui/grid' // Theses are style components that give elements flex-based grid styling. ⭐️ Will likely need to adjust these to implement new features <---
 import { H3, H4 } from '../../ui/typography'// Imports conditional styling components for H1 and H2 <---
 import Button from '../../ui/button' // Imports Button component with conditional styling <---
 import { grey, grey2 } from '../../ui/common/colors' // Imports color variables from colors sheet <---
@@ -20,12 +20,12 @@ const Profile = (props) => (
   <div>
     {/* SEO */}
     <Helmet>
-      {/* Changes title in html head to 'My Profile - Crate' <--- */}
+      {/* Changes title in html <head> to 'My Profile - Crate' <--- */}
       <title>My Profile - Crate</title>
     </Helmet>
 
     {/* Top title bar */}
-    <Grid style={{ backgroundColor: grey }}> {/* Flex container with grid styling */}
+    <Grid style={{ backgroundColor: grey }}> {/* Flex container with grid-like styling */}
       <GridCell style={{ padding: '2em', textAlign: 'center' }}> {/* Style component for children of Grid */}
         <H3 font="secondary">My profile</H3> {/* custom h3 element with secondary styling */}
       </GridCell> 
@@ -33,9 +33,9 @@ const Profile = (props) => (
 
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-        <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4> {/* Custom h4 element that renders the name from the details property from the user store via mapStateToProps */}
+        <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4> {/* Custom h4 element that renders the name from the details property from the user store via "mapStateToProps" */}
 
-        <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p> {/* renders email from details property (an object) from user store via mapStateToProps*/}
+        <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p> {/* renders email from details property (an object) from user store via "mapStateToProps" */}
 
         <Link to={userRoutes.subscriptions.path}> {/* Link element from router that routes to the path from subscriptions */}
           <Button theme="primary">Subscriptions</Button> {/* Custom Button element with primary theme */}
@@ -60,4 +60,4 @@ function profileState(state) { // method to connect 'user' state. AKA mapStateTo
   }
 }
 
-export default connect(profileState, { logout })(Profile) // connects 'user' state and dispatches logout action creator to props
+export default connect(profileState, { logout })(Profile) // connects 'user' state and dispatches logout action creator (through destructuring) to props <---

@@ -2,10 +2,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// Component
+// Component for Modal 
+//visible prop required 
 const Modal = (props) => {
   const { children, visible, ...other } = props
 
+  //returns 2 divs styled as specified with visibility based on props 
   return (
     <div {...other} style={{
       position: 'fixed',

@@ -1,3 +1,4 @@
+// This is possibly the component we will use to upload the user photo for their profile.
 // Imports
 import React from 'react'
 import PropTypes from 'prop-types'

@@ -7,13 +7,14 @@ import { grey2, grey4, black } from '../common/colors' // Import color variables
 
 // Component
 const Input = (props) => {
-  const { type, fullWidth, ...other } = props // internally destructure props
+  const { type, fullWidth, ...other } = props // internally destructure props (input attributes will be passed in individually as props and collected in ...other)
 
   return (
     <div>
       <input type={type} {...other} /> 
 
       {/* language=CSS */}
+      {/* styling for the input element */}
       <style jsx>{`
         input {
           outline: none;

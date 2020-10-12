@@ -23,6 +23,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
+// We will need to add the additional attributes of image, description,
+// shipping address and subscription id
     ])
   },
 

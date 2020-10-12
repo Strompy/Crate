@@ -15,6 +15,6 @@ module.exports = function(sequelize, DataTypes) {
     Subscription.belongsTo(models.User)
     Subscription.belongsTo(models.Crate)
   }
-
+  // Here we set the relationship between subscriptions/users and subscriptions/crates
   return Subscription
 }

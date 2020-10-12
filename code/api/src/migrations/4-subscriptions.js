@@ -37,3 +37,7 @@ module.exports = {
     return queryInterface.dropTable('subscriptions');
   }
 }
+// Similar to 1- user.js
+// Here we need to add foreign keys to connect subscription to users, and crates.
+// A subscription belongs to a user; users have many subscriptions
+// A crate belongs to a subscription, a subscription has many crates

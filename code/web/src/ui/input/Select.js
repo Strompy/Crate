@@ -1,3 +1,4 @@
+// This component allows us to create a custom dropdown selection, (for our address inputs mostly, I believe)
 // Imports
 import React from 'react'
 import PropTypes from 'prop-types'

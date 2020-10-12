@@ -1,3 +1,4 @@
+// Text area differs from input in that input elements are typically meant for oneline input, where textarea allows multiline input with the ability to add linebreaks (press enter in textarea)
 // Imports
 import React from 'react'
 import PropTypes from 'prop-types'

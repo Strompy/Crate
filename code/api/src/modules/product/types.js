@@ -1,7 +1,7 @@
 // Imports
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql'
 
-// Product type
+// Product type for GraphQL
 const ProductType = new GraphQLObjectType({
   name: 'product',
   description: 'Product Type',
@@ -20,6 +20,7 @@ const ProductType = new GraphQLObjectType({
 })
 
 // User Gender type
+// Type of productType as distinguished by gender?
 const ProductTypesType = new GraphQLObjectType({
   name: 'productTypesType',
   description: 'User Types Type',

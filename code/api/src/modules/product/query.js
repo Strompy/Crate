@@ -4,6 +4,7 @@ import { GraphQLString, GraphQLInt, GraphQLList } from 'graphql'
 // App Imports
 import { ProductType, ProductTypesType } from './types'
 import { getAll, getBySlug, getById, getRelated, getTypes } from './resolvers'
+// reslovers are like route#action
 
 // Products All
 export const products = {
@@ -39,6 +40,7 @@ export const productsRelated = {
 }
 
 // Product Types
+// Aka clothing or accessory?
 export const productTypes = {
   type: new GraphQLList(ProductTypesType),
   resolve: getTypes

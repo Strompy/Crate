@@ -4,11 +4,13 @@ import { GraphQLString, GraphQLInt } from 'graphql'
 // App Imports
 import { ProductType } from './types'
 import { create, update, remove } from './resolvers'
+// resolvers are like the routes and actions
 
 // Product create
 export const productCreate = {
   type: ProductType,
   args: {
+    // creating a product take arguments of name, slug, description, type, gender, image
     name: {
       name: 'name',
       type: GraphQLString
@@ -89,6 +91,7 @@ export const productRemove = {
   type: ProductType,
   args: {
     id: {
+      // removing a product only required id
       name: 'id',
       type: GraphQLInt
     }

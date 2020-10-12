@@ -2,6 +2,7 @@
 import params from '../../config/params'
 import models from '../../setup/models'
 
+// Queries section
 // Get all products
 export async function getAll() {
   return await models.Product.findAll({ order: [['id', 'DESC']] })
@@ -10,7 +11,7 @@ export async function getAll() {
 // Get product by slug
 export async function getBySlug(parentValue, { slug }) {
   const product = await models.Product.findOne({ where: { slug } })
-
+// findOne is Sequelize method that returns first entry
   if (!product) {
     // Product does not exists
     throw new Error('The product you are looking for does not exists or has been discontinued.')
@@ -22,7 +23,7 @@ export async function getBySlug(parentValue, { slug }) {
 // Get product by ID
 export async function getById(parentValue, { productId }) {
   const product = await models.Product.findOne({ where: { id: productId } })
-
+  // findOne is Sequelize method that returns first entry
   if (!product) {
     // Product does not exists
     throw new Error('The product you are looking for does not exists or has been discontinued.')
@@ -36,11 +37,16 @@ export async function getRelated(parentValue, { productId }) {
   return await models.Product.findAll({
     where: {
       id: { [models.Sequelize.Op.not]: productId }
+       // Where the productId is not present?
     },
     limit: 3,
     order: [[models.Sequelize.fn('RAND')]] // mock related products by showing random products
+    // Find all the other products and give me 3 random ones
   })
 }
+
+// Mutations section
+// All require authorization for use
 
 // Create product
 export async function create(parentValue, { name, slug, description, type, gender, image }, { auth }) {
@@ -56,6 +62,7 @@ export async function create(parentValue, { name, slug, description, type, gende
   } else {
     throw new Error('Operation denied.')
   }
+  // No sad path for bad data
 }
 
 // Update product
@@ -75,6 +82,7 @@ export async function update(parentValue, { id, name, slug, description, type, g
   } else {
     throw new Error('Operation denied.')
   }
+  // No sad path for bad data or bad id
 }
 
 // Delete product
@@ -94,6 +102,7 @@ export async function remove(parentValue, { id }, { auth }) {
 }
 
 // Product types
+// currently clothing or accessory
 export async function getTypes() {
   return Object.values(params.product.types)
 }

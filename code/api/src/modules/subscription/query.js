@@ -3,7 +3,9 @@ import { GraphQLInt, GraphQLList } from 'graphql'
 
 // App Imports
 import SubscriptionType from './types'
+// subscriptionType is for GraphQL schema of types
 import { getAll, getByUser, get } from './resolvers'
+// reslovers are like route#action
 
 // Subscriptions All
 export const subscriptions = {

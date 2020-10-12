@@ -1,11 +1,15 @@
 // App Imports
 import models from '../../setup/models'
 
+// Queries section
+// all queris grab the subscription and it's associated crate
+
 // Get subscription by ID
 export async function get(parentValue, { id }) {
   return await models.Subscription.findOne({
     where: { id },
     include: [
+      // include these related objects
       { model: models.User, as: 'user' },
       { model: models.Crate, as: 'crate' },
     ]
@@ -15,6 +19,7 @@ export async function get(parentValue, { id }) {
 // Get subscription by user
 export async function getByUser(parentValue, {}, { auth }) {
   if(auth.user && auth.user.id > 0) {
+    // checks if user exists and the id is greater than 0
     return await models.Subscription.findAll({
       where: {
         userId: auth.user.id
@@ -26,6 +31,7 @@ export async function getByUser(parentValue, {}, { auth }) {
     })
   } else {
     throw new Error('Please login to view your subscriptions.')
+    // is based on authentication, user id is not passed in?
   }
 }
 
@@ -39,6 +45,8 @@ export async function getAll() {
   })
 }
 
+// mutations section
+
 // Create subscription
 export async function create(parentValue, { crateId }, { auth }) {
   if(auth.user && auth.user.id > 0) {
@@ -48,6 +56,7 @@ export async function create(parentValue, { crateId }, { auth }) {
     })
   } else {
     throw new Error('Please login to subscribe to this crate.')
+    // based on logged in user, user id not passed as argument
   }
 }
 
@@ -57,5 +66,7 @@ export async function remove(parentValue, { id }, { auth }) {
     return await models.Subscription.destroy({where: {id, userId: auth.user.id}})
   } else {
     throw new Error('Access denied.')
+    // based on logged in user
+    // deletes based on logged in users id and passed subscription id?
   }
 }

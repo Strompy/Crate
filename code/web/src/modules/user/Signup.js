@@ -127,6 +127,7 @@ class Signup extends Component {
           <form onSubmit={this.onSubmit}>
             <div style={{ width: '25em', margin: '0 auto' }}>
               {/* Name */}
+              {/* Inputs can be reused from the ui storybook form the update user data. */}
               <Input
                 type="text"
                 fullWidth={true}

@@ -111,4 +111,12 @@ todo Display user extened data to profile page
 * Idea: Personal user info page or display
 * Idea: Current page
 ! Wire frame out this display of user data
+todo Add button to navigate to crate history
+* use button from ui secondary
+todo map through crates and items in crate by date
+? Do we have to create this data?
+todo mark item if returned 
+* add boolean value isReturned to products in crates to display what a user kept or returned from crate
+todo add calender to select a day for your next crate delivery
+
 */

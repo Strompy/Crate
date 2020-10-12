@@ -1,16 +1,16 @@
 // Imports
-import axios from 'axios'
-import { query, mutation } from 'gql-query-builder'
-import cookie from 'js-cookie'
+import axios from 'axios' // Axios is a more developer friendly way of making/handling http requests <---
+import { query, mutation } from 'gql-query-builder' // a helper function to generate graphQL queries using JSON <---
+import cookie from 'js-cookie' // "A simple lightweight javascript API for handling cookies"
 
 // App Imports
-import { routeApi } from '../../../setup/routes'
+import { routeApi } from '../../../setup/routes' // imports routeAPI from setup/routes/index.js which evaluates to 'localhost:8000' (stored in .env) <---
 
 // Actions Types
-export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST'
-export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
-export const SET_USER = 'AUTH/SET_USER'
-export const LOGOUT = 'AUTH/LOGOUT'
+export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST' // exports action type for login-request <---
+export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE' // exports action type for login-response <---
+export const SET_USER = 'AUTH/SET_USER' // exports action type for set-user <---
+export const LOGOUT = 'AUTH/LOGOUT' // exports action type for logout <---
 
 // Actions
 

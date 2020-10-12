@@ -1,5 +1,5 @@
 // Imports
-import { compose, combineReducers } from 'redux' // what is compose? <---
+import { combineReducers } from 'redux' 
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk' // what is redux-thunk? <---
 import { composeWithDevTools } from 'redux-devtools-extension'

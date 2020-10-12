@@ -1,17 +1,17 @@
 // Imports
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react' // Imports react to write JSX and create a component
+import PropTypes from 'prop-types' // Import proptypes object from prop-types library
 
 // UI Imports
-import { grey2, grey4, black } from '../common/colors'
+import { grey2, grey4, black } from '../common/colors' // Import color variables
 
 // Component
 const Input = (props) => {
-  const { type, fullWidth, ...other } = props
+  const { type, fullWidth, ...other } = props // internally destructure props
 
   return (
     <div>
-      <input type={type} {...other} />
+      <input type={type} {...other} /> 
 
       {/* language=CSS */}
       <style jsx>{`

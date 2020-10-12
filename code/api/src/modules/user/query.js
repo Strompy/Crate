@@ -3,7 +3,10 @@ import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql'
 
 // App Imports
 import { UserType, UserLoginType, UserGenderType } from './types'
+// object types for graphql schema
 import { getAll, getById, login, getGenders } from './resolvers'
+// reslovers are like route#action
+
 
 // All
 export const users = {

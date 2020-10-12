@@ -28,19 +28,19 @@ const Profile = (props) => (
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H3 font="secondary">My profile</H3>
       </GridCell>
+      <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+        <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+      </GridCell>
     </Grid>
 
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
 
-        <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p>
-
-        <Link to={userRoutes.subscriptions.path}>
-          <Button theme="primary">Subscriptions</Button>
-        </Link>
-
-        <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+        <p style={{ color: grey2, marginBottom: '2em' }}><b>Account email:</b> {props.user.details.email}</p>
+        <p style={{ color: grey2, marginBottom: '2em' }}><b>Shipping Address:</b> crate-team@gmail.com</p>
+        <p style={{ color: grey2, marginBottom: '2em' }}><b>Bio:</b> Here is our bio.</p>
+        <Button theme="primary" style={{ marginLeft: '1em' }}>Edit Profile Info</Button>
       </GridCell>
     </Grid>
   </div>

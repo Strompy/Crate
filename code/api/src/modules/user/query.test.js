@@ -6,7 +6,9 @@ import schema from '../../setup/schema';
 const app = express();
 
 describe("user queries", () => {
-  beforeAll(() =>{
+  beforeAll(() => {
+    let server;
+
     server = express();
     server.use(
       '/',
@@ -19,5 +21,13 @@ describe("user queries", () => {
 
   it("is true", () => {
     expect(true).toBe(true)
+  })
+
+  it("returns all users", async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ users {id, name, email } }' })
+      .expect(200)
+    expect(response.body.data.users.length).toEqual(3)
   })
 })

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "npm install",
+    "test": "jest",
     "start": "npm run build:client && npm run start:server",
     "build:client": "webpack -d && babel-node src/setup/server/pwa.js",
     "start:server": "nodemon --exec babel-node -- src/index.js",

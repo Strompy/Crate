@@ -28,6 +28,8 @@ describe("user queries", () => {
       .post('/')
       .send({ query: '{ users {id, name, email } }' })
       .expect(200)
+      
+    console.log(response.body.data)
     expect(response.body.data.users.length).toEqual(3)
   })
 })

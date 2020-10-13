@@ -2,6 +2,15 @@ import Item from '../../subscription/Item';
 import userReducer from './state';
 
 describe('Reducer Testing', () => {
+  let initState;
+  beforeEach(() => {
+    initState = {
+      error: null,
+      isLoading: false,
+      isAuthenticated: false,
+      details: null
+    }
+  })
   it('should check if SET_USER', () => {
 
 
@@ -14,13 +23,6 @@ describe('Reducer Testing', () => {
       }
     }
     
-    const initState = {
-      error: null,
-      isLoading: false,
-      isAuthenticated: false,
-      details: null
-    }
-
     const updatedState = {
       error: null,
       isLoading: false,
@@ -38,6 +40,22 @@ describe('Reducer Testing', () => {
   });
 
   it('should check LOGIN_REQUEST', () => {
+      const actionLoginReq = {
+        type: "AUTH/LOGIN_REQUEST",
+        isLoading: true
+      }
 
+      const updatedState = {
+        error: null,
+        isLoading: true,
+        isAuthenticated: false,
+        details: null
+      }
+
+    const result = userReducer(initState, actionLoginReq);
+
+    expect(result).toEqual(updatedState);
   })
+
+  
 })

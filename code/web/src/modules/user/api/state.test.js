@@ -57,5 +57,22 @@ describe('Reducer Testing', () => {
     expect(result).toEqual(updatedState);
   })
 
-  
+  it('should check LOGIN_RESPONSE', () => {
+    const actionLoginResponse = {
+      type: 'AUTH/LOGIN_RESPONSE',
+      error: '',
+    }
+
+    const updatedState = {
+        error: '',
+        isLoading: false,
+        isAuthenticated: false,
+        details: null
+      }
+
+    const result = userReducer(initState, actionLoginResponse)
+
+    expect(result).toEqual(updatedState)
+
+  })
 })

@@ -75,4 +75,23 @@ describe('Reducer Testing', () => {
     expect(result).toEqual(updatedState)
 
   })
+
+  it('should check LOGOUT reducer', () => {
+    const actionLogout = {
+      type: 'AUTH/LOGOUT'
+    }
+
+    const updatedState = {
+      error: null,
+      isLoading: false,
+      isAuthenticated: false,
+      details: null
+    }
+
+    const result = userReducer(initState, actionLogout);
+
+    expect(result).toEqual(updatedState);
+  })
+
+  
 })

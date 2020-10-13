@@ -37,7 +37,7 @@ const Profile = (props) => (
 
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-        <Tile image={`${APP_URL}//images/stock/men/1.jpg`} width='60%' height='25em' style={{ marginBottom: '2em' }}/>
+        <img src={`${APP_URL}//images/stock/men/1.jpg`} style={{ marginBottom: '2em', height: '25em' }}/>
         <H4>{props.user.details.name}</H4>
       </GridCell>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
@@ -53,7 +53,7 @@ const Profile = (props) => (
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ color: secondary, marginBottom: '1em' }}>Your next crate<br/>will ship on: January 1, 2020</H4>
         <Button theme="primary" style={{ marginLeft: '1em' }}>Edit Ship Date</Button>
-        <Tile image={`${APP_URL}/images/crate.png`} style={{ marginBottom: '1em' }} height='50%' width='50%'/>
+        <img src={`${APP_URL}/images/crate.png`} style={{ marginBottom: '1em', height: '15em', display: 'block', margin: '2em auto 1.5em auto'}}/>
         <Button theme="primary" style={{ marginLeft: '1em' }}>View Order History</Button>
       </GridCell>
     </Grid>

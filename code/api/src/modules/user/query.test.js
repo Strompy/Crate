@@ -36,10 +36,12 @@ describe("user queries", () => {
   it("returns a user", async () => {
     const response = await request(server)
       .post('/')
-      .send({ query: '{ user(id: 2) { name, email } }' })
+      .send({ query: '{ user(id: 2) { id, name, email } }' })
       .expect(200)
 
     console.log(response.body.data)
     expect(response.body.data.user.name).toEqual("The User")
+    expect(response.body.data.user.email).toEqual("user@crate.com")
+    expect(response.body.data.user.id).toEqual(2)
   })
 })

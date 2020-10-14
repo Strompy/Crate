@@ -25,6 +25,7 @@
   "homepage": "https://github.com/atulmy/crate#readme",
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

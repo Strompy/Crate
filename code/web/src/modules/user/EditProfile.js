@@ -7,21 +7,22 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 // UI Imports
-import { Grid, GridCell } from '../../../ui/grid'
-import Button from '../../../ui/button'
-import Icon from '../../../ui/icon'
-import H4 from '../../../ui/typography/H4'
-import { Input, Textarea, Select } from '../../../ui/input'
-import { white } from '../../../ui/common/colors'
+import { Grid, GridCell } from '../../ui/grid'
+import Button from '../../ui/button'
+import Icon from '../../ui/icon'
+import { H3, }  from '../../ui/typography'
+import { Input, Textarea, Select } from '../../ui/input'
+import { white, grey } from '../../ui/common/colors'
 
 // App Imports
 // import admin from '../../../setup/routes/admin'
-import { routeImage } from '../../../setup/routes'
-import { slug } from '../../../setup/helpers'
-import { upload, messageShow, messageHide } from '../../common/api/actions'
+import { routeImage } from '../../setup/routes'
+import { slug } from '../../setup/helpers'
+import { logout } from './api/actions'
+import { upload, messageShow, messageHide } from '../common/api/actions'
 
 // Component
-class CreateOrEdit extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props)
 
@@ -162,6 +163,8 @@ class CreateOrEdit extends Component {
                 borderRadius: '10px'
               }}
             /> 
+
+            {/* Upload File
             <div style={{ marginTop: '1em' }}>
               <input
                 type='file'
@@ -169,152 +172,169 @@ class CreateOrEdit extends Component {
                 required={this.state.product.id === 0}
               />
             </div>
+
+     
+            {renderIf(this.state.product.image !== '', () => (
+              <img
+                src={routeImage + this.state.product.image}
+                alt='Product Image'
+                style={{ width: 200, marginTop: '1em' }}
+              />
+            ))} */}
           </GridCell>
 
-
         </Grid>
-      </div>
-          {/* Product list */}
-          <Grid alignCenter={true} style={{ padding: '1em' }}>
-            <GridCell>
-              <H4
-                font='secondary'
-                style={{ marginBottom: '1em', textAlign: 'center' }}
-              >
-                {this.props.match.params.id === undefined ? 'Create' : 'Edit'}{' '}
-                Product
-              </H4>
-
-              {/* Form */}
-              <form onSubmit={this.onSubmit}>
-                <div style={{ width: '25em', margin: '0 auto' }}>
-                  {/* Name */}
-                  <Input
-                    type='text'
-                    fullWidth={true}
-                    placeholder='Name'
-                    required='required'
-                    name='name'
-                    autoComplete='off'
-                    value={this.state.product.name}
-                    onChange={this.onChange}
-                  />
-
-                  {/* Description */}
-                  <Textarea
-                    fullWidth={true}
-                    placeholder='Description'
-                    required='required'
-                    name='description'
-                    value={this.state.product.description}
-                    onChange={this.onChange}
-                    style={{ marginTop: '1em' }}
-                  />
-
-                  {/* Type */}
-                  <Select
-                    fullWidth={true}
-                    required='required'
-                    name='type'
-                    value={this.state.product.type}
-                    onChange={this.onChangeSelect}
-                    style={{ marginTop: '1em' }}
-                  >
-                    {this.state.productTypes.length > 0 ? (
-                      this.state.productTypes.map((type) => (
-                        <option value={type.id} key={type.id}>
-                          {type.name}
-                        </option>
-                      ))
-                    ) : (
-                      <option disabled='disabled' selected='selected'>
-                        Select type
-                      </option>
-                    )}
-                  </Select>
-
-                  {/* Gender */}
-                  <Select
-                    fullWidth={true}
-                    required='required'
-                    name='gender'
-                    value={this.state.product.gender}
-                    onChange={this.onChangeSelect}
-                    style={{ marginTop: '1em' }}
-                  >
-                    {this.state.userGenders.length > 0 ? (
-                      this.state.userGenders.map((gender) => (
-                        <option value={gender.id} key={gender.id}>
-                          {gender.name}
-                        </option>
-                      ))
-                    ) : (
-                      <option disabled='disabled' selected='selected'>
-                        Select gender
-                      </option>
-                    )}
-                  </Select>
-
-                  {/* Upload File */}
-                  <div style={{ marginTop: '1em' }}>
-                    <input
-                      type='file'
-                      onChange={this.onUpload}
-                      required={this.state.product.id === 0}
-                    />
-                  </div>
-
-                  {/* Uploaded image */}
-                  {renderIf(this.state.product.image !== '', () => (
-                    <img
-                      src={routeImage + this.state.product.image}
-                      alt='Product Image'
-                      style={{ width: 200, marginTop: '1em' }}
-                    />
-                  ))}
-                </div>
-
-                {/* Form submit */}
-                <div style={{ marginTop: '2em', textAlign: 'center' }}>
-                  <Button
-                    type='submit'
-                    theme='secondary'
-                    disabled={this.state.isLoading}
-                  >
-                    <Icon size={1.2} style={{ color: white }}>
-                      check
-                    </Icon>{' '}
-                    Save
-                  </Button>
-                </div>
-              </form>
-            </GridCell>
-          </Grid>
-        </div>
-      </div>
+      </div>     
     )
   }
 }
 
 // Component Properties
-CreateOrEdit.propTypes = {
-  productCreateOrUpdate: PropTypes.func.isRequired,
-  getProductById: PropTypes.func.isRequired,
-  getProductTypes: PropTypes.func.isRequired,
-  getUserGenders: PropTypes.func.isRequired,
-  upload: PropTypes.func.isRequired,
-  messageShow: PropTypes.func.isRequired,
-  messageHide: PropTypes.func.isRequired,
+// CreateOrEdit.propTypes = {
+//   productCreateOrUpdate: PropTypes.func.isRequired,
+//   getProductById: PropTypes.func.isRequired,
+//   getProductTypes: PropTypes.func.isRequired,
+//   getUserGenders: PropTypes.func.isRequired,
+//   upload: PropTypes.func.isRequired,
+//   messageShow: PropTypes.func.isRequired,
+//   messageHide: PropTypes.func.isRequired,
+// }
+
+// export default withRouter(
+//   connect(null, {
+//     productCreateOrUpdate,
+//     getProductById,
+//     getProductTypes,
+//     getUserGenders,
+//     upload,
+//     messageShow,
+//     messageHide,
+//   })(CreateOrEdit)
+// )
+
+function profileState(state) {
+  return {
+    user: state.user,
+  };
 }
 
-export default withRouter(
-  connect(null, {
-    productCreateOrUpdate,
-    getProductById,
-    getProductTypes,
-    getUserGenders,
-    upload,
-    messageShow,
-    messageHide,
-  })(CreateOrEdit)
-)
+export default withRouter(connect(profileState, { logout, messageShow, messageHide })(EditProfile))
+
+
+// <Grid alignCenter={true} style={{ padding: '1em' }}>
+//             <GridCell>
+//               <H4
+//                 font='secondary'
+//                 style={{ marginBottom: '1em', textAlign: 'center' }}
+//               >
+//                 {this.props.match.params.id === undefined ? 'Create' : 'Edit'}{' '}
+//                 Product
+//               </H4>
+
+//               {/* Form */}
+//               <form onSubmit={this.onSubmit}>
+//                 <div style={{ width: '25em', margin: '0 auto' }}>
+//                   {/* Name */}
+//                   <Input
+//                     type='text'
+//                     fullWidth={true}
+//                     placeholder='Name'
+//                     required='required'
+//                     name='name'
+//                     autoComplete='off'
+//                     value={this.state.product.name}
+//                     onChange={this.onChange}
+//                   />
+
+//                   {/* Description */}
+//                   <Textarea
+//                     fullWidth={true}
+//                     placeholder='Description'
+//                     required='required'
+//                     name='description'
+//                     value={this.state.product.description}
+//                     onChange={this.onChange}
+//                     style={{ marginTop: '1em' }}
+//                   />
+
+//                   {/* Type */}
+//                   <Select
+//                     fullWidth={true}
+//                     required='required'
+//                     name='type'
+//                     value={this.state.product.type}
+//                     onChange={this.onChangeSelect}
+//                     style={{ marginTop: '1em' }}
+//                   >
+//                     {this.state.productTypes.length > 0 ? (
+//                       this.state.productTypes.map((type) => (
+//                         <option value={type.id} key={type.id}>
+//                           {type.name}
+//                         </option>
+//                       ))
+//                     ) : (
+//                       <option disabled='disabled' selected='selected'>
+//                         Select type
+//                       </option>
+//                     )}
+//                   </Select>
+
+//                   {/* Gender */}
+//                   <Select
+//                     fullWidth={true}
+//                     required='required'
+//                     name='gender'
+//                     value={this.state.product.gender}
+//                     onChange={this.onChangeSelect}
+//                     style={{ marginTop: '1em' }}
+//                   >
+//                     {this.state.userGenders.length > 0 ? (
+//                       this.state.userGenders.map((gender) => (
+//                         <option value={gender.id} key={gender.id}>
+//                           {gender.name}
+//                         </option>
+//                       ))
+//                     ) : (
+//                       <option disabled='disabled' selected='selected'>
+//                         Select gender
+//                       </option>
+//                     )}
+//                   </Select>
+
+//                   {/* Upload File */}
+//                   <div style={{ marginTop: '1em' }}>
+//                     <input
+//                       type='file'
+//                       onChange={this.onUpload}
+//                       required={this.state.product.id === 0}
+//                     />
+//                   </div>
+
+//                   {/* Uploaded image */}
+//                   {renderIf(this.state.product.image !== '', () => (
+//                     <img
+//                       src={routeImage + this.state.product.image}
+//                       alt='Product Image'
+//                       style={{ width: 200, marginTop: '1em' }}
+//                     />
+//                   ))}
+//                 </div>
+
+//                 {/* Form submit */}
+//                 <div style={{ marginTop: '2em', textAlign: 'center' }}>
+//                   <Button
+//                     type='submit'
+//                     theme='secondary'
+//                     disabled={this.state.isLoading}
+//                   >
+//                     <Icon size={1.2} style={{ color: white }}>
+//                       check
+//                     </Icon>{' '}
+//                     Save
+//                   </Button>
+//                 </div>
+//               </form>
+//             </GridCell>
+//           </Grid>
+//         </div>
+//       </div>

@@ -14,6 +14,7 @@ import { H3, H4 }  from '../../ui/typography'
 import { Input, Textarea, Select } from '../../ui/input'
 import { white, grey } from '../../ui/common/colors'
 import { level1 } from '../../ui/common/shadows'
+import { primary } from '../../ui/common/fonts'
 
 // App Imports
 // import admin from '../../../setup/routes/admin'
@@ -177,6 +178,17 @@ class EditProfile extends Component {
               autoComplete="off"
               value={this.state.newProfileData.email}
               onChange={this.onChange}
+            />
+
+            {/* Bio */}
+            <Textarea
+              fullWidth={true}
+              placeholder="Bio"
+              required="required"
+              name="bio"
+              value={this.state.newProfileData.bio}
+              onChange={this.onChange}
+              style={{ marginTop: '1em', fontFamily: primary }}
             />
 
             {/* Upload File */}

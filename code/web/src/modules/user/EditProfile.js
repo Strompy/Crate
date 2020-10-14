@@ -1,254 +1,201 @@
 // Imports
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 // UI Imports
-import { Grid, GridCell } from "../../../ui/grid";
-import Button from "../../../ui/button";
-import Icon from "../../../ui/icon";
-import H4 from "../../../ui/typography/H4";
-import { Input, Textarea, Select } from "../../../ui/input";
-import { white } from "../../../ui/common/colors";
+import { Grid, GridCell } from '../../../ui/grid'
+import Button from '../../../ui/button'
+import Icon from '../../../ui/icon'
+import H4 from '../../../ui/typography/H4'
+import { Input, Textarea, Select } from '../../../ui/input'
+import { white } from '../../../ui/common/colors'
 
 // App Imports
-// import admin from "../../../setup/routes/admin";
-import { routeImage } from "../../../setup/routes";
-import { slug } from "../../../setup/helpers";
-import { upload, messageShow, messageHide } from "../../common/api/actions";
+// import admin from '../../../setup/routes/admin'
+import { routeImage } from '../../../setup/routes'
+import { slug } from '../../../setup/helpers'
+import { upload, messageShow, messageHide } from '../../common/api/actions'
 
 // Component
 class CreateOrEdit extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       // isLoading: false,
       
-    };
-  }
-
-  componentDidMount() {
-    // Get product types
-    this.props
-      .getProductTypes()
-      .then((response) => {
-        if (response.data.errors && response.data.errors.length > 0) {
-          this.props.messageShow(response.data.errors[0].message);
-        } else {
-          let product = this.state.product;
-          product.gender = response.data.data.productTypes[0].id;
-
-          this.setState({
-            productTypes: response.data.data.productTypes,
-            product,
-          });
-        }
-      })
-      .catch((error) => {
-        this.props.messageShow(
-          "There was some error fetching product types. Please try again."
-        );
-      });
-
-    // Get user genders
-    this.props
-      .getUserGenders()
-      .then((response) => {
-        if (response.data.errors && response.data.errors.length > 0) {
-          this.props.messageShow(response.data.errors[0].message);
-        } else {
-          let product = this.state.product;
-          product.gender = response.data.data.userGenders[0].id;
-
-          this.setState({
-            userGenders: response.data.data.userGenders,
-            product,
-          });
-        }
-      })
-      .catch((error) => {
-        this.props.messageShow(
-          "There was some error fetching product types. Please try again."
-        );
-      });
-
-    // Get product details (edit case)
-    this.getProduct(parseInt(this.props.match.params.id));
-  }
-
-  getProduct = (productId) => {
-    if (productId > 0) {
-      this.props
-        .getProductById(productId)
-        .then((response) => {
-          if (response.data.errors && response.data.errors.length > 0) {
-            this.props.messageShow(response.data.errors[0].message);
-          } else {
-            this.setState({
-              product: response.data.data.productById,
-            });
-          }
-        })
-        .catch((error) => {
-          this.props.messageShow(
-            "There was some error fetching product types. Please try again."
-          );
-        });
     }
-  };
+  }
 
   onChange = (event) => {
-    let product = this.state.product;
-    product[event.target.name] = event.target.value;
+    let product = this.state.product
+    product[event.target.name] = event.target.value
 
-    if (event.target.name === "name") {
-      product.slug = slug(event.target.value);
+    if (event.target.name === 'name') {
+      product.slug = slug(event.target.value)
     }
 
     this.setState({
       product,
-    });
-  };
+    })
+  }
 
   onChangeSelect = (event) => {
-    let product = this.state.product;
-    product[event.target.name] = parseInt(event.target.value);
+    let product = this.state.product
+    product[event.target.name] = parseInt(event.target.value)
 
     this.setState({
       product,
-    });
-  };
+    })
+  }
 
   onSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     this.setState({
       isLoading: true,
-    });
+    })
 
-    this.props.messageShow("Saving product, please wait...");
+    this.props.messageShow('Saving information, please wait...')
 
     // Save product
-    this.props
-      .productCreateOrUpdate(this.state.product)
-      .then((response) => {
-        this.setState({
-          isLoading: false,
-        });
+    // this.props
+    //   .productCreateOrUpdate(this.state.product)
+    //   .then((response) => {
+    //     this.setState({
+    //       isLoading: false,
+    //     })
 
-        if (response.data.errors && response.data.errors.length > 0) {
-          this.props.messageShow(response.data.errors[0].message);
-        } else {
-          this.props.messageShow("Product saved successfully.");
+    //     if (response.data.errors && response.data.errors.length > 0) {
+    //       this.props.messageShow(response.data.errors[0].message)
+    //     } else {
+    //       this.props.messageShow('Information saved successfully.')
 
-          this.props.history.push(admin.productList.path);
-        }
-      })
-      .catch((error) => {
-        this.props.messageShow("There was some error. Please try again.");
+    //       this.props.history.push(admin.productList.path)
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     this.props.messageShow('There was some error. Please try again.')
 
-        this.setState({
-          isLoading: false,
-        });
-      })
-      .then(() => {
-        window.setTimeout(() => {
-          this.props.messageHide();
-        }, 5000);
-      });
-  };
+    //     this.setState({
+    //       isLoading: false,
+    //     })
+    //   })
+    //   .then(() => {
+    //     window.setTimeout(() => {
+    //       this.props.messageHide()
+    //     }, 5000)
+    //   })
+  }
 
   onUpload = (event) => {
-    this.props.messageShow("Uploading file, please wait...");
+    this.props.messageShow('Uploading photo, please wait...')
 
     this.setState({
       isLoading: true,
-    });
+    })
 
-    let data = new FormData();
-    data.append("file", event.target.files[0]);
+    let data = new FormData()
+    data.append('file', event.target.files[0])
 
     // Upload image
     this.props
       .upload(data)
       .then((response) => {
         if (response.status === 200) {
-          this.props.messageShow("File uploaded successfully.");
+          this.props.messageShow('File uploaded successfully.')
 
-          let product = this.state.product;
-          product.image = `/images/uploads/${response.data.file}`;
+          let product = this.state.product
+          product.image = `/images/uploads/${response.data.file}`
 
           this.setState({
             product,
-          });
+          })
         } else {
-          this.props.messageShow("Please try again.");
+          this.props.messageShow('Please try again.')
         }
       })
       .catch((error) => {
-        this.props.messageShow("There was some error. Please try again.");
+        this.props.messageShow('There was some error. Please try again.')
       })
       .then(() => {
         this.setState({
           isLoading: false,
-        });
+        })
 
         window.setTimeout(() => {
-          this.props.messageHide();
-        }, 5000);
-      });
-  };
+          this.props.messageHide()
+        }, 5000)
+      })
+  }
 
   render() {
     return (
       <div>
         {/* SEO */}
         <Helmet>
-          <title>Product / Create or Edit - Admin - Crate</title>
+          <title>Edit Profile - Crate</title>
         </Helmet>
 
-        {/* Top menu bar */}
-        <AdminMenu />
+        <Grid style={{ backgroundColor: grey }} justifyRight={true}>
+          <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '20vw', marginRight: '24%' }}>
+            <H3 font="secondary">Edit profile</H3>
+          </GridCell>
+          
+          <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '9vw' }}>
+            <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+          </GridCell>
+        </Grid>
+        
+        <Grid>
+          <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+            <img
+              src={`${APP_URL}//images/stock/men/4.jpg`}
+              style={{ 
+                marginBottom: '2em', 
+                height: '24em', 
+                boxShadow: level1, 
+                borderRadius: '10px'
+              }}
+            /> 
+            <div style={{ marginTop: '1em' }}>
+              <input
+                type='file'
+                onChange={this.onUpload}
+                required={this.state.product.id === 0}
+              />
+            </div>
+          </GridCell>
 
-        {/* Page Content */}
-        <div>
-          {/* Top actions bar */}
-          <Grid alignCenter={true} style={{ padding: "1em" }}>
-            <GridCell style={{ textAlign: "left" }}>
-              <Link to={admin.productList.path}>
-                <Button>
-                  <Icon size={1.2}>arrow_back</Icon> Back
-                </Button>
-              </Link>
-            </GridCell>
-          </Grid>
 
+        </Grid>
+      </div>
           {/* Product list */}
-          <Grid alignCenter={true} style={{ padding: "1em" }}>
+          <Grid alignCenter={true} style={{ padding: '1em' }}>
             <GridCell>
               <H4
-                font="secondary"
-                style={{ marginBottom: "1em", textAlign: "center" }}
+                font='secondary'
+                style={{ marginBottom: '1em', textAlign: 'center' }}
               >
-                {this.props.match.params.id === undefined ? "Create" : "Edit"}{" "}
+                {this.props.match.params.id === undefined ? 'Create' : 'Edit'}{' '}
                 Product
               </H4>
 
               {/* Form */}
               <form onSubmit={this.onSubmit}>
-                <div style={{ width: "25em", margin: "0 auto" }}>
+                <div style={{ width: '25em', margin: '0 auto' }}>
                   {/* Name */}
                   <Input
-                    type="text"
+                    type='text'
                     fullWidth={true}
-                    placeholder="Name"
-                    required="required"
-                    name="name"
-                    autoComplete="off"
+                    placeholder='Name'
+                    required='required'
+                    name='name'
+                    autoComplete='off'
                     value={this.state.product.name}
                     onChange={this.onChange}
                   />
@@ -256,22 +203,22 @@ class CreateOrEdit extends Component {
                   {/* Description */}
                   <Textarea
                     fullWidth={true}
-                    placeholder="Description"
-                    required="required"
-                    name="description"
+                    placeholder='Description'
+                    required='required'
+                    name='description'
                     value={this.state.product.description}
                     onChange={this.onChange}
-                    style={{ marginTop: "1em" }}
+                    style={{ marginTop: '1em' }}
                   />
 
                   {/* Type */}
                   <Select
                     fullWidth={true}
-                    required="required"
-                    name="type"
+                    required='required'
+                    name='type'
                     value={this.state.product.type}
                     onChange={this.onChangeSelect}
-                    style={{ marginTop: "1em" }}
+                    style={{ marginTop: '1em' }}
                   >
                     {this.state.productTypes.length > 0 ? (
                       this.state.productTypes.map((type) => (
@@ -280,7 +227,7 @@ class CreateOrEdit extends Component {
                         </option>
                       ))
                     ) : (
-                      <option disabled="disabled" selected="selected">
+                      <option disabled='disabled' selected='selected'>
                         Select type
                       </option>
                     )}
@@ -289,11 +236,11 @@ class CreateOrEdit extends Component {
                   {/* Gender */}
                   <Select
                     fullWidth={true}
-                    required="required"
-                    name="gender"
+                    required='required'
+                    name='gender'
                     value={this.state.product.gender}
                     onChange={this.onChangeSelect}
-                    style={{ marginTop: "1em" }}
+                    style={{ marginTop: '1em' }}
                   >
                     {this.state.userGenders.length > 0 ? (
                       this.state.userGenders.map((gender) => (
@@ -302,41 +249,41 @@ class CreateOrEdit extends Component {
                         </option>
                       ))
                     ) : (
-                      <option disabled="disabled" selected="selected">
+                      <option disabled='disabled' selected='selected'>
                         Select gender
                       </option>
                     )}
                   </Select>
 
                   {/* Upload File */}
-                  <div style={{ marginTop: "1em" }}>
+                  <div style={{ marginTop: '1em' }}>
                     <input
-                      type="file"
+                      type='file'
                       onChange={this.onUpload}
                       required={this.state.product.id === 0}
                     />
                   </div>
 
                   {/* Uploaded image */}
-                  {renderIf(this.state.product.image !== "", () => (
+                  {renderIf(this.state.product.image !== '', () => (
                     <img
                       src={routeImage + this.state.product.image}
-                      alt="Product Image"
-                      style={{ width: 200, marginTop: "1em" }}
+                      alt='Product Image'
+                      style={{ width: 200, marginTop: '1em' }}
                     />
                   ))}
                 </div>
 
                 {/* Form submit */}
-                <div style={{ marginTop: "2em", textAlign: "center" }}>
+                <div style={{ marginTop: '2em', textAlign: 'center' }}>
                   <Button
-                    type="submit"
-                    theme="secondary"
+                    type='submit'
+                    theme='secondary'
                     disabled={this.state.isLoading}
                   >
                     <Icon size={1.2} style={{ color: white }}>
                       check
-                    </Icon>{" "}
+                    </Icon>{' '}
                     Save
                   </Button>
                 </div>
@@ -345,7 +292,7 @@ class CreateOrEdit extends Component {
           </Grid>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -358,7 +305,7 @@ CreateOrEdit.propTypes = {
   upload: PropTypes.func.isRequired,
   messageShow: PropTypes.func.isRequired,
   messageHide: PropTypes.func.isRequired,
-};
+}
 
 export default withRouter(
   connect(null, {
@@ -370,4 +317,4 @@ export default withRouter(
     messageShow,
     messageHide,
   })(CreateOrEdit)
-);
+)

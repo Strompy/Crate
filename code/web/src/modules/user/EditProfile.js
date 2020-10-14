@@ -10,9 +10,10 @@ import { withRouter } from 'react-router-dom'
 import { Grid, GridCell } from '../../ui/grid'
 import Button from '../../ui/button'
 import Icon from '../../ui/icon'
-import { H3, }  from '../../ui/typography'
+import { H3, H4 }  from '../../ui/typography'
 import { Input, Textarea, Select } from '../../ui/input'
 import { white, grey } from '../../ui/common/colors'
+import { level1 } from '../../ui/common/shadows'
 
 // App Imports
 // import admin from '../../../setup/routes/admin'
@@ -20,6 +21,7 @@ import { routeImage } from '../../setup/routes'
 import { renderIf, slug } from '../../setup/helpers'
 import { logout } from './api/actions'
 import { upload, messageShow, messageHide } from '../common/api/actions'
+import { APP_URL } from '../../setup/config/env'
 
 // Component
 class EditProfile extends Component {
@@ -48,86 +50,86 @@ class EditProfile extends Component {
     this.setState({ newProfileData })
   }
 
-  //do we need onChangeSelect? Seems only diff is adding a parseInt so may not need
+  // //do we need onChangeSelect? Seems only diff is adding a parseInt so may not need
 
-  onSubmit = (event) => {
-    event.preventDefault()
+  // onSubmit = (event) => {
+  //   event.preventDefault()
     
-    this.setState({
-      isLoading: true,
-    })
+  //   this.setState({
+  //     isLoading: true,
+  //   })
 
-    this.props.messageShow('Saving information, please wait...')
+  //   this.props.messageShow('Saving information, please wait...')
     
-    //call to back-end to post/update new data (method below does not exist yet)
-    this.props.updateProfileInfo(this.state.newProfileData)
-      .then((response) => {
-        this.setState({
-          isLoading: false,
-        })
+  //   //call to back-end to post/update new data (method below does not exist yet)
+  //   this.props.updateProfileInfo(this.state.newProfileData)
+  //     .then((response) => {
+  //       this.setState({
+  //         isLoading: false,
+  //       })
         
-        if (response.data.errors && response.data.errors.length > 0) {
-          this.props.messageShow(response.data.errors[0].message)
-        } else {
-          this.props.messageShow('Information saved successfully.')
-          //below, add call for function that will dispatch action to store (not yet created)
-        }
-      })
+  //       if (response.data.errors && response.data.errors.length > 0) {
+  //         this.props.messageShow(response.data.errors[0].message)
+  //       } else {
+  //         this.props.messageShow('Information saved successfully.')
+  //         //might need something else here
+  //         //might need to save image path on user
+  //       }
+  //     })
 
-      .catch((error) => {
-        this.props.messageShow('There was some error. Please try again.')
+  //     .catch((error) => {
+  //       this.props.messageShow('There was some error. Please try again.')
 
-        this.setState({
-          isLoading: false,
-        })
-      })
-      .then(() => {
-        window.setTimeout(() => {
-          this.props.messageHide()
-        }, 5000)
-      })
-  }
+  //       this.setState({
+  //         isLoading: false,
+  //       })
+  //     })
+  //     .then(() => {
+  //       window.setTimeout(() => {
+  //         this.props.messageHide()
+  //       }, 5000)
+  //     })
+  // }
 
-  onUpload = (event) => {
-    this.props.messageShow('Uploading photo, please wait...')
+  // onUpload = (event) => {
+  //   this.props.messageShow('Uploading photo, please wait...')
 
-    this.setState({
-      isLoading: true,
-    })
+  //   this.setState({
+  //     isLoading: true,
+  //   })
 
-    let data = new FormData()
-    data.append('file', event.target.files[0])
+  //   let data = new FormData()
+  //   data.append('file', event.target.files[0])
 
-    // Upload image
-    this.props
-      .upload(data)
-      .then((response) => {
-        if (response.status === 200) {
-          this.props.messageShow('File uploaded successfully.')
+  //   // Upload image
+  //   this.props.upload(data)
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         this.props.messageShow('File uploaded successfully.')
 
-          let image = this.state.image
-          image = `/images/uploads/${response.data.file}`
+  //         let image = this.state.image
+  //         image = `/images/uploads/${response.data.file}`
 
-          this.setState({
-            image,
-          })
-        } else {
-          this.props.messageShow('Please try again.')
-        }
-      })
-      .catch((error) => {
-        this.props.messageShow('There was some error. Please try again.')
-      })
-      .then(() => {
-        this.setState({
-          isLoading: false,
-        })
+  //         this.setState({
+  //           image,
+  //         })
+  //       } else {
+  //         this.props.messageShow('Please try again.')
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       this.props.messageShow('There was some error. Please try again.')
+  //     })
+  //     .then(() => {
+  //       this.setState({
+  //         isLoading: false,
+  //       })
 
-        window.setTimeout(() => {
-          this.props.messageHide()
-        }, 5000)
-      })
-  }
+  //       window.setTimeout(() => {
+  //         this.props.messageHide()
+  //       }, 5000)
+  //     })
+  // }
 
   render() {
     return (
@@ -140,26 +142,42 @@ class EditProfile extends Component {
         {/* Top Grey bar */}
         <Grid style={{ backgroundColor: grey }} justifyRight={true}>
           <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '20vw', marginRight: '24%' }}>
-            <H3 font="secondary">Edit profile</H3>
+            <H3 font='secondary'>Edit profile</H3>
           </GridCell>
           
           <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '9vw' }}>
-            <Button theme="secondary" onClick={props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
+            <Button theme='secondary' onClick={this.props.logout} style={{ marginLeft: '1em' }}>Logout</Button>
           </GridCell>
         </Grid>
         
         {/* Image upload column */}
         <Grid>
           <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-            <img
-              src={`${APP_URL}/images/stock/men/4.jpg`}
-              style={{ 
-                marginBottom: '2em', 
-                height: '24em', 
-                boxShadow: level1, 
-                borderRadius: '10px'
-              }}
-            /> 
+            <H4 font='secondary' style={{ marginBottom: '1.5em' }}>Profile Details</H4>
+
+            {/* Name */}
+            <Input
+              type="text"
+              fullWidth={true}
+              placeholder='Name'
+              required="required"
+              name="name"
+              autoComplete="off"
+              value={this.state.newProfileData.name}
+              onChange={this.onChange}
+            />
+
+            {/* Email */}
+            <Input
+              type="text"
+              fullWidth={true}
+              placeholder='Email'
+              required="required"
+              name="email"
+              autoComplete="off"
+              value={this.state.newProfileData.email}
+              onChange={this.onChange}
+            />
 
             {/* Upload File */}
             <div style={{ marginTop: '1em' }}>
@@ -180,6 +198,7 @@ class EditProfile extends Component {
         </Grid>
 
         {/* Profile Info Edit form */}
+
       </div>     
     )
   }
@@ -195,18 +214,6 @@ EditProfile.propTypes = {
   messageShow: PropTypes.func.isRequired,
   messageHide: PropTypes.func.isRequired,
 }
-
-// export default withRouter(
-//   connect(null, {
-//     productCreateOrUpdate,
-//     getProductById,
-//     getProductTypes,
-//     getUserGenders,
-//     upload,
-//     messageShow,
-//     messageHide,
-//   })(CreateOrEdit)
-// )
 
 function editProfileState(state) {
   return {

@@ -12,13 +12,13 @@ export const shippingAddresses = {
 }
 
 // Shipping Address By user
-export const subscriptionsByShippingAddress = {
+export const shippingAdressByUser = {
   type: new GraphQLList(ShippingAddressType),
   resolve: getByUser
 }
 
 // Shipping Address By id
-export const shippingAddressById = {
+export const shippingAddress = {
   type: ShippingAddressType,
   args: {
     id: { type: GraphQLInt }

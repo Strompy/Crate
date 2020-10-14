@@ -3,7 +3,7 @@ import models from '../../setup/models'
 
 // Get shippingaddress by ID
 export async function get(parentValue, { id }) {
-  return await models.Subscription.findOne({
+  return await models.ShippingAddress.findOne({
     where: { id },
     include: [
       { model: models.User, as: 'user' }

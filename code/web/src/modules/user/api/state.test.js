@@ -93,5 +93,20 @@ describe('Reducer Testing', () => {
     expect(result).toEqual(updatedState);
   })
 
-  
+  it('should by default return state', () => {
+    const actionDoesNotExist = {};
+
+    const updatedState = {
+      error: null,
+      isLoading: false,
+      isAuthenticated: false,
+      details: null
+    }
+
+    const result = userReducer(initState, actionDoesNotExist);
+
+    expect(result).toEqual(updatedState);
+
+
+  })
 })

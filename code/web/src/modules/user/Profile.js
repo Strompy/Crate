@@ -36,6 +36,7 @@ const Profile = (props) => (
       </GridCell>
     </Grid>
 
+  
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <img

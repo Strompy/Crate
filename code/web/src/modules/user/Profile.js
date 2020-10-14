@@ -67,7 +67,9 @@ const Profile = (props) => (
           "Clothes are just accessories for my rollerblades, and I'm all about accessories."
         </p>
 
-        <Button theme="primary">Edit Profile Info</Button>
+        <Link to={userRoutes.editProfile.path}>
+          <Button theme="primary">Edit Profile Info</Button>
+        </Link>
       </GridCell>
 
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>

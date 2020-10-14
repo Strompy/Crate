@@ -17,7 +17,7 @@ import { white, grey } from '../../ui/common/colors'
 // App Imports
 // import admin from '../../../setup/routes/admin'
 import { routeImage } from '../../setup/routes'
-import { slug } from '../../setup/helpers'
+import { renderIf, slug } from '../../setup/helpers'
 import { logout } from './api/actions'
 import { upload, messageShow, messageHide } from '../common/api/actions'
 
@@ -27,70 +27,65 @@ class EditProfile extends Component {
     super(props)
 
     this.state = {
-      // isLoading: false,
-      
+      isLoading: false, 
+      newProfileData: {
+        name: '',
+        email: '',
+        bio: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        image: ''
+      }
     }
   }
 
   onChange = (event) => {
-    let product = this.state.product
-    product[event.target.name] = event.target.value
+    let newProfileData = this.state.newProfileData
+    newProfileData[event.target.name] = event.target.value
 
-    if (event.target.name === 'name') {
-      product.slug = slug(event.target.value)
-    }
-
-    this.setState({
-      product,
-    })
+    this.setState({ newProfileData })
   }
 
-  onChangeSelect = (event) => {
-    let product = this.state.product
-    product[event.target.name] = parseInt(event.target.value)
-
-    this.setState({
-      product,
-    })
-  }
+  //do we need onChangeSelect? Seems only diff is adding a parseInt so may not need
 
   onSubmit = (event) => {
     event.preventDefault()
-
+    
     this.setState({
       isLoading: true,
     })
 
     this.props.messageShow('Saving information, please wait...')
+    
+    //call to back-end to post/update new data (method below does not exist yet)
+    this.props.updateProfileInfo(this.state.newProfileData)
+      .then((response) => {
+        this.setState({
+          isLoading: false,
+        })
+        
+        if (response.data.errors && response.data.errors.length > 0) {
+          this.props.messageShow(response.data.errors[0].message)
+        } else {
+          this.props.messageShow('Information saved successfully.')
+          //below, add call for function that will dispatch action to store (not yet created)
+        }
+      })
 
-    // Save product
-    // this.props
-    //   .productCreateOrUpdate(this.state.product)
-    //   .then((response) => {
-    //     this.setState({
-    //       isLoading: false,
-    //     })
+      .catch((error) => {
+        this.props.messageShow('There was some error. Please try again.')
 
-    //     if (response.data.errors && response.data.errors.length > 0) {
-    //       this.props.messageShow(response.data.errors[0].message)
-    //     } else {
-    //       this.props.messageShow('Information saved successfully.')
-
-    //       this.props.history.push(admin.productList.path)
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     this.props.messageShow('There was some error. Please try again.')
-
-    //     this.setState({
-    //       isLoading: false,
-    //     })
-    //   })
-    //   .then(() => {
-    //     window.setTimeout(() => {
-    //       this.props.messageHide()
-    //     }, 5000)
-    //   })
+        this.setState({
+          isLoading: false,
+        })
+      })
+      .then(() => {
+        window.setTimeout(() => {
+          this.props.messageHide()
+        }, 5000)
+      })
   }
 
   onUpload = (event) => {
@@ -110,11 +105,11 @@ class EditProfile extends Component {
         if (response.status === 200) {
           this.props.messageShow('File uploaded successfully.')
 
-          let product = this.state.product
-          product.image = `/images/uploads/${response.data.file}`
+          let image = this.state.image
+          image = `/images/uploads/${response.data.file}`
 
           this.setState({
-            product,
+            image,
           })
         } else {
           this.props.messageShow('Please try again.')
@@ -142,6 +137,7 @@ class EditProfile extends Component {
           <title>Edit Profile - Crate</title>
         </Helmet>
 
+        {/* Top Grey bar */}
         <Grid style={{ backgroundColor: grey }} justifyRight={true}>
           <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '20vw', marginRight: '24%' }}>
             <H3 font="secondary">Edit profile</H3>
@@ -152,10 +148,11 @@ class EditProfile extends Component {
           </GridCell>
         </Grid>
         
+        {/* Image upload column */}
         <Grid>
           <GridCell style={{ padding: '2em', textAlign: 'center' }}>
             <img
-              src={`${APP_URL}//images/stock/men/4.jpg`}
+              src={`${APP_URL}/images/stock/men/4.jpg`}
               style={{ 
                 marginBottom: '2em', 
                 height: '24em', 
@@ -164,41 +161,40 @@ class EditProfile extends Component {
               }}
             /> 
 
-            {/* Upload File
+            {/* Upload File */}
             <div style={{ marginTop: '1em' }}>
               <input
                 type='file'
                 onChange={this.onUpload}
-                required={this.state.product.id === 0}
               />
             </div>
 
-     
-            {renderIf(this.state.product.image !== '', () => (
+            {renderIf(this.state.newProfileData.image !== '', () => (
               <img
-                src={routeImage + this.state.product.image}
-                alt='Product Image'
+                src={routeImage + this.state.newProfileData.image}
+                alt='Profile Image'
                 style={{ width: 200, marginTop: '1em' }}
               />
-            ))} */}
+            ))}
           </GridCell>
-
         </Grid>
+
+        {/* Profile Info Edit form */}
       </div>     
     )
   }
 }
 
 // Component Properties
-// CreateOrEdit.propTypes = {
-//   productCreateOrUpdate: PropTypes.func.isRequired,
-//   getProductById: PropTypes.func.isRequired,
-//   getProductTypes: PropTypes.func.isRequired,
-//   getUserGenders: PropTypes.func.isRequired,
-//   upload: PropTypes.func.isRequired,
-//   messageShow: PropTypes.func.isRequired,
-//   messageHide: PropTypes.func.isRequired,
-// }
+EditProfile.propTypes = {
+  // productCreateOrUpdate: PropTypes.func.isRequired,
+  // getProductById: PropTypes.func.isRequired,
+  // getProductTypes: PropTypes.func.isRequired,
+  // getUserGenders: PropTypes.func.isRequired,
+  upload: PropTypes.func.isRequired,
+  messageShow: PropTypes.func.isRequired,
+  messageHide: PropTypes.func.isRequired,
+}
 
 // export default withRouter(
 //   connect(null, {
@@ -212,13 +208,13 @@ class EditProfile extends Component {
 //   })(CreateOrEdit)
 // )
 
-function profileState(state) {
+function editProfileState(state) {
   return {
     user: state.user,
   };
 }
 
-export default withRouter(connect(profileState, { logout, messageShow, messageHide })(EditProfile))
+export default withRouter(connect(editProfileState, { logout, messageShow, messageHide, upload })(EditProfile))
 
 
 // <Grid alignCenter={true} style={{ padding: '1em' }}>

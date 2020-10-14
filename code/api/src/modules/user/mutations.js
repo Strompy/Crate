@@ -19,6 +19,36 @@ export const userSignup = {
       type: GraphQLString
     },
 
+    bio: {
+      name: 'bio',
+      type: GraphQLString
+    },
+
+    image: {
+      name: 'image',
+      type: GraphQLString
+    },
+
+    street: {
+      name: 'street',
+      type: GraphQLString
+    },
+
+    city: {
+      name: 'city',
+      type: GraphQLString
+    },
+
+    state: {
+      name: 'state',
+      type: GraphQLString
+    },
+
+    zip: {
+      name: 'zip',
+      type: GraphQLString
+    },
+
     password: {
       name: 'password',
       type: GraphQLString

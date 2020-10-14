@@ -69,6 +69,11 @@ export const userUpdate = {
     bio: {
       name: 'bio',
       type: GraphQLString
+    },
+
+    image: {
+      name: 'image',
+      type: GraphQLString
     }
   },
   resolve: update

@@ -33,6 +33,7 @@ export async function create(parentValue, { name, email, password, bio, image, s
   }
 }
 
+// Login
 export async function login(parentValue, { email, password }) {
   const user = await models.User.findOne({ where: { email } })
 
@@ -61,6 +62,26 @@ export async function login(parentValue, { email, password }) {
         token: jwt.sign(userDetailsToken, serverConfig.secret)
       }
     }
+  }
+}
+
+// Update
+export async function update(parentValue, { id, name, email, street, city, state, zip, bio }, { auth }) {
+  if(auth.user && auth.user.id > 0) {
+    return await models.User.update(
+      {
+        name,
+        email,
+        bio,
+        street,
+        city,
+        state,
+        zip
+      },
+      {where: { id } }
+    )
+  } else {
+    throw new Error('Operation denied.')
   }
 }
 

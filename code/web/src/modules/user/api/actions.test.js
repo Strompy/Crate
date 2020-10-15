@@ -47,15 +47,4 @@ describe('User Actions', () => {
 
     })
   })
-  it('should check logout action', () => {
-    const actionCall = actions.logout()
-    
-
-    const expectedResult = {
-      type: actions.LOGOUT,
-    }
-
-    expect(actionCall).toEqual(expectedResult)
-
-  })
 })

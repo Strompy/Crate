@@ -12,7 +12,7 @@ import Button from '../../ui/button'
 import Icon from '../../ui/icon'
 import { H3, H4 }  from '../../ui/typography'
 import { Input, Textarea, Select } from '../../ui/input'
-import { white, grey } from '../../ui/common/colors'
+import { white, grey, grey2 } from '../../ui/common/colors'
 import { level1 } from '../../ui/common/shadows'
 import { primary } from '../../ui/common/fonts'
 
@@ -23,6 +23,7 @@ import { renderIf, slug } from '../../setup/helpers'
 import { logout } from './api/actions'
 import { upload, messageShow, messageHide } from '../common/api/actions'
 import { APP_URL } from '../../setup/config/env'
+import { statesList } from './helperData/statesList'
 
 // Component
 class EditProfile extends Component {
@@ -151,63 +152,142 @@ class EditProfile extends Component {
           </GridCell>
         </Grid>
         
+        <form style={{
+          backgroundColor: grey,
+          borderRadius: '10px',
+          padding: '20px 20px 40px',
+          width: '50%',
+          margin: '2em auto',
+          boxShadow: `inset -1px 1px 10px ${grey2}`
+        }}>
         {/* Image upload column */}
-        <Grid>
-          <GridCell style={{ padding: '2em', textAlign: 'center' }}>
-            <H4 font='secondary' style={{ marginBottom: '1.5em' }}>Profile Details</H4>
+          <Grid justifyCenter={true}>
+            <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '45%' }}>
+              <H4 font='secondary' style={{ marginBottom: '1.5em' }}>Profile Details</H4>
 
-            {/* Name */}
-            <Input
-              type="text"
-              fullWidth={true}
-              placeholder='Name'
-              required="required"
-              name="name"
-              autoComplete="off"
-              value={this.state.newProfileData.name}
-              onChange={this.onChange}
-            />
-
-            {/* Email */}
-            <Input
-              type="text"
-              fullWidth={true}
-              placeholder='Email'
-              required="required"
-              name="email"
-              autoComplete="off"
-              value={this.state.newProfileData.email}
-              onChange={this.onChange}
-            />
-
-            {/* Bio */}
-            <Textarea
-              fullWidth={true}
-              placeholder="Bio"
-              required="required"
-              name="bio"
-              value={this.state.newProfileData.bio}
-              onChange={this.onChange}
-              style={{ marginTop: '1em', fontFamily: primary }}
-            />
-
-            {/* Upload File */}
-            <div style={{ marginTop: '1em' }}>
-              <input
-                type='file'
-                onChange={this.onUpload}
+              {/* Name */}
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder='Name'
+                required="required"
+                name="name"
+                autoComplete="off"
+                value={this.state.newProfileData.name}
+                onChange={this.onChange}
+                style={{ marginBottom: '1.75em'}}
               />
-            </div>
 
-            {renderIf(this.state.newProfileData.image !== '', () => (
-              <img
-                src={routeImage + this.state.newProfileData.image}
-                alt='Profile Image'
-                style={{ width: 200, marginTop: '1em' }}
+              {/* Email */}
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder='Email'
+                required="required"
+                name="email"
+                autoComplete="off"
+                value={this.state.newProfileData.email}
+                onChange={this.onChange}
+                style={{ marginBottom: '1.75em' }}
               />
-            ))}
-          </GridCell>
-        </Grid>
+
+              {/* Bio */}
+              <Textarea
+                fullWidth={true}
+                placeholder="Bio"
+                required="required"
+                name="bio"
+                value={this.state.newProfileData.bio}
+                onChange={this.onChange}
+                style={{ fontFamily: primary, marginBottom: '1.75em'}}
+              />
+
+              {/* Upload File */}
+              <div>
+                <label htmlFor='file'>
+                  Upload profile picture → {' '}
+                  <input
+                    type='file'
+                    onChange={this.onUpload}
+                  />
+                </label>
+              </div>
+
+              {renderIf(this.state.newProfileData.image !== '', () => (
+                <img
+                  src={routeImage + this.state.newProfileData.image}
+                  alt='Profile Image'
+                  style={{ width: 200, marginTop: '1em' }}
+                />
+              ))}
+            </GridCell>
+            <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '45%' }}>
+              <H4 font='secondary' style={{ marginBottom: '1.5em' }}>Shipping Address</H4>
+
+              {/* Street address */}
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder='Street address'
+                required="required"
+                name="street"
+                autoComplete="off"
+                value={this.state.newProfileData.street}
+                onChange={this.onChange}
+                style={{ marginBottom: '1.75em' }}
+              />
+
+              {/* City */}
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder='City'
+                required="required"
+                name="city"
+                autoComplete="off"
+                value={this.state.newProfileData.city}
+                onChange={this.onChange}
+                style={{ marginBottom: '1.75em' }}
+              />
+
+              {/* State Select will go here */}
+              <Select
+                fullWidth={true}
+                required="required"
+                name="state"
+                value={this.state.newProfileData.state}
+                onChange={this.onChange}
+                style={{ marginBottom: '1.75em'}}
+              >
+                <option value='' style={{ color: '#757575'}}>Please select state</option>
+                {
+                  statesList.map(state => (
+                    <option value={state.code} key={state.code}>{state.name}</option>
+                    ))
+                }
+              </Select>
+
+              {/* Zip code */}
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder='Zip code'
+                required="required"
+                name="zip"
+                autoComplete="off"
+                value={this.state.newProfileData.zip}
+                onChange={this.onChange}
+                style={{ marginBottom: '1.75em' }}
+              />
+
+            </GridCell>
+          </Grid>
+          <Grid justifyCenter={true}>
+            <GridCell style={{ maxWidth: '10vw'}}>
+              <Button theme='secondary'>Update Profile</Button>
+            </GridCell>
+          </Grid>
+        </form>
 
         {/* Profile Info Edit form */}
 

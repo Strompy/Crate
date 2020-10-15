@@ -162,7 +162,7 @@ class EditProfile extends Component {
         {/* Image upload column */}
           <Grid justifyCenter={true}>
             <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '45%' }}>
-              <H4 font='primary' style={{ marginBottom: '1.5em' }}>Profile Details</H4>
+              <H4 font='primary' style={{ marginBottom: '1.13em' }}>Profile Details</H4>
 
               {/* Name */}
               <Input
@@ -174,7 +174,7 @@ class EditProfile extends Component {
                 autoComplete="off"
                 value={this.state.newProfileData.name}
                 onChange={this.onChange}
-                style={{ marginBottom: '1.5em'}}
+                style={{ marginBottom: '1.13em'}}
               />
 
               {/* Email */}
@@ -187,7 +187,7 @@ class EditProfile extends Component {
                 autoComplete="off"
                 value={this.state.newProfileData.email}
                 onChange={this.onChange}
-                style={{ marginBottom: '1.5em' }}
+                style={{ marginBottom: '1.13em' }}
               />
 
               {/* Bio */}
@@ -198,7 +198,7 @@ class EditProfile extends Component {
                 name="bio"
                 value={this.state.newProfileData.bio}
                 onChange={this.onChange}
-                style={{ fontFamily: primary, marginBottom: '1.5em'}}
+                style={{ fontFamily: primary, height: '1em', marginBottom: '1.13em'}}
               />
 
               {/* Upload File */}
@@ -222,7 +222,7 @@ class EditProfile extends Component {
               ))}
             </GridCell>
             <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '45%' }}>
-              <H4 font='primary' style={{ marginBottom: '1.5em' }}>Shipping Address</H4>
+              <H4 font='primary' style={{ marginBottom: '1.13em' }}>Shipping Address</H4>
 
               {/* Street address */}
               <Input
@@ -234,7 +234,7 @@ class EditProfile extends Component {
                 autoComplete="off"
                 value={this.state.newProfileData.street}
                 onChange={this.onChange}
-                style={{ marginBottom: '1.5em' }}
+                style={{ marginBottom: '1.13em' }}
               />
 
               {/* City */}
@@ -247,7 +247,7 @@ class EditProfile extends Component {
                 autoComplete="off"
                 value={this.state.newProfileData.city}
                 onChange={this.onChange}
-                style={{ marginBottom: '1.5em' }}
+                style={{ marginBottom: '1.13em' }}
               />
 
               {/* State Select will go here */}
@@ -257,7 +257,7 @@ class EditProfile extends Component {
                 name="state"
                 value={this.state.newProfileData.state}
                 onChange={this.onChange}
-                style={{ marginBottom: '1.5em'}}
+                style={{ marginBottom: '1.13em'}}
               >
                 <option value='' style={{ color: '#757575'}}>Please select state </option>
                 {

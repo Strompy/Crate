@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "setup": "npm run setup:install && npm run setup:db",
     "setup:install": "npm install",
     "setup:db": "npm run db:migrate && npm run db:seed",
@@ -23,6 +24,7 @@
     "@babel/node": "7.8.7",
     "@babel/plugin-transform-runtime": "7.9.0",
     "@babel/preset-env": "7.9.5",
+    "jest": "^26.5.3",
     "nodemon": "2.0.3",
     "sequelize-cli": "^5.5.1"
   },

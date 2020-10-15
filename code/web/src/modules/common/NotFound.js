@@ -30,7 +30,7 @@ const NotFound = () => (
     <Grid>
       <GridCell style={{ textAlign: 'center' }}>
         <p style={{ textAlign: 'center', marginTop: '2em', marginBottom: '2em' }}>
-          <img src={`${ APP_URL }/images/crate-broken.png`} alt="404" style={{ width: '10em' }}/>
+          <img src={`${ APP_URL }/images/crate-broken.png`} alt="404" style={{ width: '25em', borderRadius: '50%' }}/>
         </p>
 
         <H3 font="secondary">Page you are looking for does not exists or has removed. It's 404.</H3>

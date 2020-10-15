@@ -45,21 +45,4 @@ describe('User Actions', () => {
     expect(store.getActions()).toEqual(expectedActions)
     })
   })
-
-   it('should check logout action', () => {
-    fetchMock.getOnce('/users', {
-      body: { user: user },
-      headers: { 'content-type': 'application/json' }
-    })
-    
-    const store = mockStore({})
-
-    const actionCall = actions.logout()
-    
-    return store.dispatch(actionCall).then(() => {
-      expect(store.getActions()).toEqual(actions.LOGOUT)
-    })
-    
-  })
-
 })

@@ -30,6 +30,7 @@ describe("user queries", () => {
       .send({ query: '{ users { name email } }' })
       .expect(200)
 
+      expect(Object.keys(response.body.data)).toEqual(['users'])
       expect(response.body.data.users.length).toEqual(2)
       expect(response.body.data.users[0].name).toEqual('The Admin')
       expect(response.body.data.users[1].name).toEqual('The User')

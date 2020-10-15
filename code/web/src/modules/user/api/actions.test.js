@@ -7,7 +7,6 @@ import * as actions from './actions'
 const middlewares = [thunk] 
 const mockStore = configureMockStore(middlewares)
 
-
 describe('User Actions', () => {
   let user
   beforeEach(() => {
@@ -30,7 +29,7 @@ describe('User Actions', () => {
 
   it('should check login action return error message on post', () => {
     fetchMock.getOnce('/users', {
-      body: { user: user},
+      body: { user: user },
       headers: { 'content-type': 'application/json' }
     })
     const store = mockStore({ users: [] })
@@ -44,7 +43,23 @@ describe('User Actions', () => {
     return store.dispatch(actionCall).then(() => {
       // return of async actions
     expect(store.getActions()).toEqual(expectedActions)
-
     })
   })
+
+   it('should check logout action', () => {
+    fetchMock.getOnce('/users', {
+      body: { user: user },
+      headers: { 'content-type': 'application/json' }
+    })
+    
+    const store = mockStore({})
+
+    const actionCall = actions.logout()
+    
+    return store.dispatch(actionCall).then(() => {
+      expect(store.getActions()).toEqual(actions.LOGOUT)
+    })
+    
+  })
+
 })

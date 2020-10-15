@@ -63,6 +63,14 @@ describe("product queries", () => {
     expect(response.body.data.productsRelated.length).toEqual(3)
   })
 
+  it("returns possible product types", async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ productTypes { id, name } }' })
+      .expect(200)
+    expect(response.body.data.productTypes.length).toEqual(2)
+  })
+
   it("is true", () => {
     expect(true).toBe(true)
   })

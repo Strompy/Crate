@@ -55,6 +55,14 @@ describe("product queries", () => {
     expect(response.body.data.product.image).toEqual("/images/stock/belt-female.jpg")
   })
 
+  it("returns related products", async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ productsRelated(productId: 1) { id, name, description, slug, type, gender, image } }' })
+      .expect(200)
+    expect(response.body.data.productsRelated.length).toEqual(3)
+  })
+
   it("is true", () => {
     expect(true).toBe(true)
   })

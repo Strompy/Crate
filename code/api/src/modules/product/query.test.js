@@ -27,7 +27,7 @@ describe("product queries", () => {
     expect(response.body.data.products.length).toEqual(8)
   })
 
-  it("returns a product", async () => {
+  it("returns a product by Id", async () => {
     const response = await request(server)
       .post('/')
       .send({ query: '{ productById(productId: 1) { id, name, description, slug, type, gender, image } }' })
@@ -39,6 +39,20 @@ describe("product queries", () => {
     expect(response.body.data.productById.type).toEqual(2)
     expect(response.body.data.productById.gender).toEqual(2)
     expect(response.body.data.productById.image).toEqual("/images/stock/belt-female.jpg")
+  })
+
+  it("returns a product by slug", async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ product(slug: "belt-for-women" ) { id, name, description, slug, type, gender, image } }' })
+      .expect(200)
+    expect(response.body.data.product.id).toEqual(1)
+    expect(response.body.data.product.name).toEqual("Belt for Women")
+    expect(response.body.data.product.description).toEqual("A very nice belt for women.")
+    expect(response.body.data.product.slug).toEqual("belt-for-women",)
+    expect(response.body.data.product.type).toEqual(2)
+    expect(response.body.data.product.gender).toEqual(2)
+    expect(response.body.data.product.image).toEqual("/images/stock/belt-female.jpg")
   })
 
   it("is true", () => {

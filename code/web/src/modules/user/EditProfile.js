@@ -198,7 +198,7 @@ class EditProfile extends Component {
                 name="bio"
                 value={this.state.newProfileData.bio}
                 onChange={this.onChange}
-                style={{ fontFamily: primary, height: '1em', marginBottom: '1.13em'}}
+                style={{ fontFamily: primary, height: '1em', marginBottom: '1.3em'}}
               />
 
               {/* Upload File */}

@@ -27,6 +27,20 @@ describe("product queries", () => {
     expect(response.body.data.products.length).toEqual(8)
   })
 
+  it("returns a product", async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ productById(productId: 1) { id, name, description, slug, type, gender, image } }' })
+      .expect(200)
+    expect(response.body.data.productById.id).toEqual(1)
+    expect(response.body.data.productById.name).toEqual("Belt for Women")
+    expect(response.body.data.productById.description).toEqual("A very nice belt for women.")
+    expect(response.body.data.productById.slug).toEqual("belt-for-women",)
+    expect(response.body.data.productById.type).toEqual(2)
+    expect(response.body.data.productById.gender).toEqual(2)
+    expect(response.body.data.productById.image).toEqual("/images/stock/belt-female.jpg")
+  })
+
   it("is true", () => {
     expect(true).toBe(true)
   })

@@ -67,7 +67,6 @@ export async function login(parentValue, { email, password }) {
 
 // Update
 export async function update(parentValue, { id, name, email, street, city, state, zip, bio, image }, { auth }) {
-  console.log(auth.user.id)
   if(auth.user && auth.user.id > 0) {
     return await models.User.update(
       {

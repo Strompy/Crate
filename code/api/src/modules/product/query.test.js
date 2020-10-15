@@ -70,8 +70,4 @@ describe("product queries", () => {
       .expect(200)
     expect(response.body.data.productTypes.length).toEqual(2)
   })
-
-  it("is true", () => {
-    expect(true).toBe(true)
-  })
 })

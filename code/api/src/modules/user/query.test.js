@@ -23,4 +23,24 @@ describe("user queries", () => {
     expect(true).toBe(true);
   })
 
+  // It returns all users
+  it('returns all users', async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ users { name email } }' })
+      .expect(200)
+
+      expect(response.body.data.users.length).toEqual(2)
+      expect(response.body.data.users[0].name).toEqual('The Admin')
+      expect(response.body.data.users[1].name).toEqual('The User')
+      expect(response.body.data.users[0].email).toEqual('admin@crate.com')
+      expect(response.body.data.users[1].email).toEqual('user@crate.com')
+  })
+
+  // it returns a user by id
+
+  // it logs in a user and returns a JWT
+
+  // it returns user genders
+
 });

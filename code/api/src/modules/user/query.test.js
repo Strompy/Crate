@@ -59,8 +59,8 @@ describe("user queries", () => {
       .expect(200)
 
     expect(Object.keys(response.body.data.userLogin)).toEqual([ 'token' ])
-    expect(response.body.data.userLogin).not.toBeUndefined()
-    expect(response.body.data.userLogin).not.toBeNull()
+    expect(response.body.data.userLogin.token).not.toBeUndefined()
+    expect(response.body.data.userLogin.token).not.toBeNull()
   })
 
   // it returns user genders

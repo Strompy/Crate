@@ -44,7 +44,6 @@ describe("user queries", () => {
   it('returns a user by id', async () => {
     const response = await request(server)
       .post('/')
-      // .send({ query: '{ user(id = 1) { name email } }' })
       .send({ query: '{ user(id: 1) { id name email password role bio image street city state zip } }'})
       .expect(200)
 
@@ -53,7 +52,26 @@ describe("user queries", () => {
   })
 
   // it logs in a user and returns a JWT
+  it('logs in a user and returns JWT', async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "user@crate.com", password: "123456") { token } }'})
+      .expect(200)
+
+    expect(Object.keys(response.body.data.userLogin)).toEqual([ 'token' ])
+    expect(response.body.data.userLogin).not.toBeUndefined()
+    expect(response.body.data.userLogin).not.toBeNull()
+  })
 
   // it returns user genders
+  it('returns user Genders', async () => {
+    const response = await request(server)
+      .post('/')
+      .send({ query: '{ userGenders { name } }'})
+      .expect(200)
 
+    expect(response.body.data.userGenders.length).toEqual(2)
+    expect(response.body.data.userGenders[0].name).toEqual('Male')
+    expect(response.body.data.userGenders[1].name).toEqual('Female')
+  })
 });

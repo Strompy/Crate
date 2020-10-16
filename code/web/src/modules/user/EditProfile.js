@@ -53,44 +53,44 @@ class EditProfile extends Component {
 
   // //do we need onChangeSelect? Seems only diff is adding a parseInt so may not need
 
-  // onSubmit = (event) => {
-  //   event.preventDefault()
+  onSubmit = (event) => {
+    event.preventDefault()
     
-  //   this.setState({
-  //     isLoading: true,
-  //   })
+    this.setState({
+      isLoading: true,
+    })
 
-  //   this.props.messageShow('Saving information, please wait...')
+    this.props.messageShow('Saving information, please wait...')
     
-  //   //call to back-end to post/update new data (method below does not exist yet)
-  //   this.props.updateProfileInfo(this.state.newProfileData)
-  //     .then((response) => {
-  //       this.setState({
-  //         isLoading: false,
-  //       })
+    //call to back-end to post/update new data (method below does not exist yet)
+    this.props.updateProfileInfo(this.state.newProfileData)
+      .then((response) => {
+        this.setState({
+          isLoading: false,
+        })
         
-  //       if (response.data.errors && response.data.errors.length > 0) {
-  //         this.props.messageShow(response.data.errors[0].message)
-  //       } else {
-  //         this.props.messageShow('Information saved successfully.')
-  //         //might need something else here
-  //         //might need to save image path on user
-  //       }
-  //     })
+        if (response.data.errors && response.data.errors.length > 0) {
+          this.props.messageShow(response.data.errors[0].message)
+        } else {
+          this.props.messageShow('Information saved successfully.')
+          //might need something else here
+          //might need to save image path on user
+        }
+      })
 
-  //     .catch((error) => {
-  //       this.props.messageShow('There was some error. Please try again.')
+      .catch((error) => {
+        this.props.messageShow('There was some error. Please try again.')
 
-  //       this.setState({
-  //         isLoading: false,
-  //       })
-  //     })
-  //     .then(() => {
-  //       window.setTimeout(() => {
-  //         this.props.messageHide()
-  //       }, 5000)
-  //     })
-  // }
+        this.setState({
+          isLoading: false,
+        })
+      })
+      .then(() => {
+        window.setTimeout(() => {
+          this.props.messageHide()
+        }, 5000)
+      })
+  }
 
   // onUpload = (event) => {
   //   this.props.messageShow('Uploading photo, please wait...')
@@ -151,7 +151,7 @@ class EditProfile extends Component {
           </GridCell>
         </Grid>
         
-        <form style={{
+        <form onSubmit={this.onSubmit} style={{
           backgroundColor: grey,
           borderRadius: '10px',
           padding: '20px 20px 40px',

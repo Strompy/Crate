@@ -11,6 +11,7 @@ export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
+export const UPDATE_USER = 'AUTH/UPDATE_USER'
 
 // Actions
 
@@ -64,6 +65,29 @@ export function login(userCredentials, isLoading = true) {
         })
       })
   }
+}
+
+export function updateProfileInfo(newProfileData) {
+  return axios.post(routeApi, mutation({
+    operation: 'userUpdate',
+    variables: newProfileData,
+    fields: ['name', 'email', 'bio', 'street', 'city', 'state', 'zip', 'image']
+  }))
+  .then(response => {
+    let error = ''
+
+    if (response.data.errors && response.data.errors.length > 0) {
+      error = response.data.errors[0].message
+    } else {
+      dispatch({
+        type: UPDATE_USER,
+        newProfileData
+      })
+    }
+  })
+  .catch(error => {
+
+  })
 }
 
 // Set user token and info in localStorage and cookie

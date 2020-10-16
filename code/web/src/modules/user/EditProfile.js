@@ -19,7 +19,7 @@ import { primary } from '../../ui/common/fonts'
 // import admin from '../../../setup/routes/admin'
 import { routeImage } from '../../setup/routes'
 import { renderIf, slug } from '../../setup/helpers'
-import { logout } from './api/actions'
+import { logout, updateProfileInfo } from './api/actions'
 import { upload, messageShow, messageHide } from '../common/api/actions'
 import { APP_URL } from '../../setup/config/env'
 import { statesList } from './helperData/statesList'
@@ -39,7 +39,8 @@ class EditProfile extends Component {
         city: '',
         state: '',
         zip: '',
-        image: ''
+        image: '',
+        id: null
       }
     }
   }
@@ -55,9 +56,13 @@ class EditProfile extends Component {
 
   onSubmit = (event) => {
     event.preventDefault()
+
+    let newProfileData = this.state.newProfileData
+    newProfileData.id = this.props.user.details.id
     
     this.setState({
       isLoading: true,
+      newProfileData
     })
 
     this.props.messageShow('Saving information, please wait...')
@@ -92,45 +97,46 @@ class EditProfile extends Component {
       })
   }
 
-  // onUpload = (event) => {
-  //   this.props.messageShow('Uploading photo, please wait...')
+  onUpload = (event) => {
+    this.props.messageShow('Uploading photo, please wait...')
 
-  //   this.setState({
-  //     isLoading: true,
-  //   })
+    this.setState({
+      isLoading: true,
+    })
 
-  //   let data = new FormData()
-  //   data.append('file', event.target.files[0])
+    let data = new FormData()
+    data.append('file', event.target.files[0])
 
-  //   // Upload image
-  //   this.props.upload(data)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         this.props.messageShow('File uploaded successfully.')
+    // Upload image
+    this.props.upload(data)
+      .then((response) => {
+        if (response.status === 200) {
+          this.props.messageShow('File uploaded successfully.')
 
-  //         let image = this.state.image
-  //         image = `/images/uploads/${response.data.file}`
+          let image = this.state.image
+          image = `${response.data.file}`
 
-  //         this.setState({
-  //           image,
-  //         })
-  //       } else {
-  //         this.props.messageShow('Please try again.')
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       this.props.messageShow('There was some error. Please try again.')
-  //     })
-  //     .then(() => {
-  //       this.setState({
-  //         isLoading: false,
-  //       })
+          this.setState({
+            image,
+          })
+          console.log('image', this.state.newProfileData.image)
+        } else {
+          this.props.messageShow('Please try again.')
+        }
+      })
+      .catch((error) => {
+        this.props.messageShow('There was some error. Please try again.')
+      })
+      .then(() => {
+        this.setState({
+          isLoading: false,
+        })
 
-  //       window.setTimeout(() => {
-  //         this.props.messageHide()
-  //       }, 5000)
-  //     })
-  // }
+        window.setTimeout(() => {
+          this.props.messageHide()
+        }, 5000)
+      })
+  }
 
   render() {
     return (
@@ -151,7 +157,8 @@ class EditProfile extends Component {
           </GridCell>
         </Grid>
         
-        <form onSubmit={this.onSubmit} style={{
+        <form onSubmit={this.onSubmit}
+          style={{
           backgroundColor: grey,
           borderRadius: '10px',
           padding: '20px 20px 40px',
@@ -283,7 +290,7 @@ class EditProfile extends Component {
           </Grid>
           <Grid justifyCenter={true}>
             <GridCell style={{ maxWidth: '12.45vw'}}>
-              <Button theme='secondary'>Update Profile</Button>
+              <Button type='submit' theme='secondary'>Update Profile</Button>
             </GridCell>
           </Grid>
         </form>
@@ -308,6 +315,6 @@ function editProfileState(state) {
   };
 }
 
-export default withRouter(connect(editProfileState, { logout, messageShow, messageHide, upload })(EditProfile))
+export default withRouter(connect(editProfileState, { logout, messageShow, messageHide, upload, updateProfileInfo })(EditProfile))
 
 

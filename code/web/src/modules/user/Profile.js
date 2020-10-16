@@ -15,7 +15,7 @@ import { level1 } from '../../ui/common/shadows'
 // App Imports
 import userRoutes from '../../setup/routes/user' 
 import { logout } from './api/actions'
-import { APP_URL } from '../../setup/config/env'
+import { APP_URL, APP_URL_API } from '../../setup/config/env'
 
 // Component
 const Profile = ({ user, logout }) => {
@@ -57,7 +57,7 @@ const Profile = ({ user, logout }) => {
       <Grid>
         <GridCell style={{ padding: "2em", textAlign: "center" }}>
           <img
-            src={`${APP_URL}/images/uploads/${details.image}` || `${APP_URL}//images/stock/men/4.jpg`}
+            src={`${APP_URL_API}/images/uploads/${details.image}` || `${APP_URL}//images/stock/men/4.jpg`}
             style={{
               marginBottom: "2em",
               height: "24em",

@@ -225,7 +225,7 @@ class EditProfile extends Component {
 
               {renderIf(this.state.newProfileData.image !== '', () => (
                 <img
-                  src={routeImage + this.state.newProfileData.image}
+                  src={routeImage + '/images/uploads/' + this.state.newProfileData.image}
                   alt='Profile Image'
                   style={{ width: 200, marginTop: '1em' }}
                 />

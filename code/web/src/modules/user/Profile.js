@@ -57,7 +57,7 @@ const Profile = ({ user, logout }) => {
       <Grid>
         <GridCell style={{ padding: "2em", textAlign: "center" }}>
           <img
-            src={details.image || `${APP_URL}//images/stock/men/4.jpg`}
+            src={`${APP_URL}/images/uploads/${details.image}` || `${APP_URL}//images/stock/men/4.jpg`}
             style={{
               marginBottom: "2em",
               height: "24em",

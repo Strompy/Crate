@@ -116,10 +116,13 @@ class EditProfile extends Component {
           let image = this.state.image
           image = `${response.data.file}`
 
+          let newProfileData = this.state.newProfileData
+          newProfileData.image = image
+
           this.setState({
-            image,
+            newProfileData
           })
-          console.log('image', this.state.newProfileData.image)
+
         } else {
           this.props.messageShow('Please try again.')
         }

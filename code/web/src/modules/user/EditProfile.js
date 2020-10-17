@@ -32,8 +32,8 @@ class EditProfile extends Component {
     this.state = {
       isLoading: false, 
       newProfileData: {
-        name: '',
-        email: '',
+        name: this.props.user.details.name || "",
+        email: this.props.user.details.email || "",
         bio: '',
         street: '',
         city: '',

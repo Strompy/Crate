@@ -59,7 +59,6 @@ class EditProfile extends Component {
 
     let newProfileData = this.state.newProfileData
     newProfileData.id = this.props.user.details.id
-    
     this.setState({
       isLoading: true,
       newProfileData
@@ -74,15 +73,14 @@ class EditProfile extends Component {
           isLoading: false,
         })
         
-        if (response.data.errors && response.data.errors.length > 0) {
-          this.props.messageShow(response.data.errors[0].message)
+        if (this.props.user.error !== '') {
+          this.props.messageShow(this.props.user.error)
         } else {
           this.props.messageShow('Information saved successfully.')
           //might need something else here
           //might need to save image path on user
         }
       })
-
       .catch((error) => {
         this.props.messageShow('There was some error. Please try again.')
 
@@ -178,7 +176,7 @@ class EditProfile extends Component {
               <Input
                 type="text"
                 fullWidth={true}
-                placeholder='Name'
+                placeholder="Name"
                 required="required"
                 name="name"
                 autoComplete="off"
@@ -191,7 +189,7 @@ class EditProfile extends Component {
               <Input
                 type="text"
                 fullWidth={true}
-                placeholder='Email'
+                placeholder="Email"
                 required="required"
                 name="email"
                 autoComplete="off"
@@ -221,15 +219,15 @@ class EditProfile extends Component {
                     style={{ marginTop: '1em'}}
                   />
                 </label>
+                {renderIf(this.state.newProfileData.image !== '', () => (
+                  <img
+                    src={routeImage + '/images/uploads/' + this.state.newProfileData.image}
+                    alt='Profile Image'
+                    style={{ width: 40, marginTop: '-1em' }}
+                  />
+                ))}
               </div>
 
-              {renderIf(this.state.newProfileData.image !== '', () => (
-                <img
-                  src={routeImage + '/images/uploads/' + this.state.newProfileData.image}
-                  alt='Profile Image'
-                  style={{ width: 200, marginTop: '1em' }}
-                />
-              ))}
             </GridCell>
             <GridCell style={{ padding: '2em', textAlign: 'center', maxWidth: '45%' }}>
               <H4 font='primary' style={{ marginBottom: '1.13em' }}>Shipping Address</H4>

@@ -2,7 +2,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql'
 
 // App Imports
-import ProductType from '../product/types'
+import {ProductType} from '../product/types'
 import CrateType from '../crate/types'
 
 // CrateProduct type

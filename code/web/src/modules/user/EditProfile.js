@@ -68,23 +68,23 @@ class EditProfile extends Component {
       
       if (this.props.user.error !== null || this.props.user.error !== '') {
         this.props.messageShow('There was some error. Please try again.')
-        .then(
-          window.setTimeout(() => {
-            this.props.messageHide()
-          }, 3000))
+        // .then(
+        window.setTimeout(() => {
+          this.props.messageHide()
+        }, 3000)
 
       } else {
         this.props.messageShow('Information saved successfully.')
-        .then(
-          window.setTimeout(() => {
-            this.props.messageHide()
-            
-            window.location.href= `${APP_URL}/user/profile`
-        }, 3000))
-        .then(
-          this.setState({
-          isLoading: false,
-        }))    
+        // .then(
+        window.setTimeout(() => {
+          this.props.messageHide()
+          
+          window.location.href= `${APP_URL}/user/profile`
+      }, 3000)
+        // .then(
+        this.setState({
+        isLoading: false,
+        })    
       }
   }
 

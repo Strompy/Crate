@@ -14,6 +14,7 @@ export const LOGOUT = 'AUTH/LOGOUT'
 export const UPDATE_USER = 'AUTH/UPDATE_USER'
 export const SET_ERROR = 'AUTH/SET_ERROR'
 
+
 // Actions
 
 // Set a user after login or using localStorage token

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 // UI Imports
@@ -16,12 +16,11 @@ import { level1 } from '../../ui/common/shadows'
 import { primary } from '../../ui/common/fonts'
 
 // App Imports
-// import admin from '../../../setup/routes/admin'
+import userRoutes from '../../setup/routes/user' 
 import { routeImage } from '../../setup/routes'
-import { renderIf, slug } from '../../setup/helpers'
+import { renderIf } from '../../setup/helpers'
 import { logout, updateProfileInfo } from './api/actions'
 import { upload, messageShow, messageHide } from '../common/api/actions'
-import { APP_URL } from '../../setup/config/env'
 import { statesList } from './helperData/statesList'
 
 // Component
@@ -31,6 +30,7 @@ class EditProfile extends Component {
 
     this.state = {
       isLoading: false, 
+      submitted: false,
       newProfileData: {
         name: this.props.user.details.name || "",
         email: this.props.user.details.email || "",
@@ -66,26 +66,24 @@ class EditProfile extends Component {
   
     this.props.updateProfileInfo(this.state.newProfileData)
       
-      if (this.props.user.error !== null || this.props.user.error !== '') {
-        this.props.messageShow('There was some error. Please try again.')
-        .then(
-          window.setTimeout(() => {
-            this.props.messageHide()
-          }, 3000))
+    if (this.props.user.error !== null && this.props.user.error !== '') {
+      this.props.messageShow('There was some error. Please try again.')
 
-      } else {
-        this.props.messageShow('Information saved successfully.')
-        .then(
-          window.setTimeout(() => {
-            this.props.messageHide()
-            
-            window.location.href= `${APP_URL}/user/profile`
-        }, 3000))
-        .then(
-          this.setState({
-          isLoading: false,
-        }))    
-      }
+      window.setTimeout(() => {
+        this.props.messageHide()
+      }, 3000)
+
+    } else {
+      this.props.messageShow('Information saved successfully.')
+
+      window.setTimeout(() => {
+        this.props.messageHide()
+      }, 3000)
+
+      this.setState({
+      isLoading: false,
+      })    
+    }
   }
 
   onUpload = (event) => {
@@ -128,12 +126,14 @@ class EditProfile extends Component {
 
         window.setTimeout(() => {
           this.props.messageHide()
-          
         }, 5000)
       })
   }
 
   render() {
+    if (this.state.submitted) {
+      return <Redirect to={userRoutes.profile.path} />
+    }
     return (
       <div>
         {/* SEO */}
@@ -152,7 +152,10 @@ class EditProfile extends Component {
           </GridCell>
         </Grid>
         
-        <form onSubmit={this.onSubmit}
+        <form onSubmit={(event) => {
+          this.onSubmit(event)
+          this.setState({submitted: true})
+          }}
           style={{
           backgroundColor: grey,
           borderRadius: '10px',
@@ -292,9 +295,6 @@ class EditProfile extends Component {
             </GridCell>
           </Grid>
         </form>
-
-        {/* Profile Info Edit form */}
-
       </div>     
     )
   }
@@ -313,6 +313,15 @@ function editProfileState(state) {
   };
 }
 
-export default withRouter(connect(editProfileState, { logout, messageShow, messageHide, upload, updateProfileInfo })(EditProfile))
+export default withRouter(
+  connect(
+    editProfileState, { 
+      logout,
+      messageShow, 
+      messageHide,
+      upload,
+      updateProfileInfo 
+    }
+  )(EditProfile))
 
 

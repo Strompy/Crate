@@ -21,8 +21,6 @@ import { APP_URL, APP_URL_API } from '../../setup/config/env'
 const Profile = ({ user, logout }) => {
   const { details } = user
 
-  const getUserImageStatus = `${APP_URL_API}/uploads/${details.image}`
-  
   return (
     <div>
       {/* SEO */}

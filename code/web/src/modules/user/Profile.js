@@ -25,6 +25,7 @@ class Profile extends Component {
     super(props) 
 
     this.state = {
+      isLoading: false,
       date: ''
     }
   }
@@ -32,6 +33,11 @@ class Profile extends Component {
   onChange = (event) => {
     const date = event.target.value
     this.setState({ date })
+  }
+
+  updateShipDate = (event) => {
+    event.preventDefault()
+    //this will be like onSubmit function for editProfile and call new action to update new date 
   }
 
   render() {
@@ -149,7 +155,7 @@ class Profile extends Component {
                 onChange={this.onChange}
                 style={{ border: '1px solid grey', background: '#ffff', marginBottom: '1em', fontFamily: primary, padding: '0.3em', boxShadow: level1, borderRadius: "10px"}}
               />
-              <Button theme="primary">Submit</Button>
+              <Button theme="primary" onClick={updateShipDate}>Submit</Button>
             </div>
 
             <img

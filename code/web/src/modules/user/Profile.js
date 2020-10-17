@@ -18,6 +18,7 @@ import { primary } from '../../ui/common/fonts'
 import userRoutes from '../../setup/routes/user' 
 import { logout } from './api/actions'
 import { APP_URL, APP_URL_API } from '../../setup/config/env'
+import { subscriptions } from '../subscription/api/state'
 
 // Component
 class Profile extends Component {
@@ -140,15 +141,18 @@ class Profile extends Component {
                 boxShadow: `inset -1px 1px 10px ${grey2}`,
               }}
             >
+
+             {/* date element */}
               <H5 style={{ color: "black", marginBottom: "0.5em" }}>
                 Your next crate will ship on:
               </H5>
               <H6 style={{ color: secondary, marginBottom: "2em", fontSize: '1.4em' }}>
-                November 13, 2020
+                { this.props.subscriptions.date ? this.props.subscriptions.date : 'No Date Selected'}
               </H6>
               <H6 style={{ color: "black", marginBottom: "0.5em" }}>
                 Change Next Shipment Date: 
               </H6>
+             
               <Input 
                 type="date"
                 value={this.state.date}
@@ -181,7 +185,8 @@ Profile.propTypes = {
 // Component State
 function profileState(state) {
   return {
-    user: state.user
+    user: state.user,
+    subscriptions: state.subscriptions
   }
 }
 

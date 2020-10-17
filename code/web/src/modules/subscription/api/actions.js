@@ -15,6 +15,7 @@ export const SUBSCRIPTIONS_GET_LIST_BY_USER_FAILURE = 'SUBSCRIPTIONS/GET_LIST_BY
 export const SUBSCRIPTIONS_GET_REQUEST = 'SUBSCRIPTIONS/GET_REQUEST'
 export const SUBSCRIPTIONS_GET_RESPONSE = 'SUBSCRIPTIONS/GET_RESPONSE'
 export const SUBSCRIPTIONS_GET_FAILURE = 'SUBSCRIPTIONS/GET_FAILURE'
+export const SUBSCRIPTIONS_SET_DATE = 'SUBSCRIPTIONS/SET_DATE'
 
 // Actions
 
@@ -139,5 +140,36 @@ export function remove(variables) {
       variables,
       fields: ['id']
     }))
+  }
+}
+
+
+//Change date for selected subscription
+export function setSubscriptionDate(id, date) {
+  return dispatch => {
+
+    return axios.post(routeApi, mutation({
+      operation: 'subscriptionDateUpdate',
+      variables: { id, date },
+      fields: ['id', 'date']
+    }))
+    .then(response => {
+      let error = ''
+
+      if (response.data.errors && response.data.errors.length > 0) {
+        error = response.data.errors[0].message
+      } else {
+        dispatch({
+          type: SUBSCRIPTIONS_SET_DATE,
+          date
+        })
+      }
+    })
+    .catch(error => {
+      dispatch({
+        type: SUBSCRIPTIONS_GET_FAILURE,
+        error
+      })
+    })
   }
 }

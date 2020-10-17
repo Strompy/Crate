@@ -19,7 +19,8 @@ import {
 const subscriptionsInitialState = {
   isLoading: false,
   error: null,
-  list: []
+  list: [],
+  date: null
 }
 
 // State

@@ -29,7 +29,7 @@ export function getList(isLoading = true) {
 
     return axios.post(routeApi, query({
       operation: 'subscriptions',
-      fields: ['id', 'user { name, email }', 'crate { id, name, description }', 'createdAt']
+      fields: ['id', 'date', 'user { name, email }', 'crate { id, name, description }', 'createdAt']
     }))
       .then(response => {
         if (response.status === 200) {

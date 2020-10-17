@@ -155,14 +155,16 @@ class Profile extends Component {
                 onChange={this.onChange}
                 style={{ border: '1px solid grey', background: '#ffff', marginBottom: '1em', fontFamily: primary, padding: '0.3em', boxShadow: level1, borderRadius: "10px"}}
               />
-              <Button theme="primary" onClick={updateShipDate}>Submit</Button>
+              <Button theme="primary" onClick={this.updateShipDate}>Submit</Button>
             </div>
 
             <img
               src={`${APP_URL}/images/crate.png`}
               style={{ height: "12em", display: "block", margin: "2.4em auto 1em" }}
             />
-            <Button theme="primary">View Order History</Button>
+            <Link to={userRoutes.orderHistory.path}>
+              <Button theme="primary">View Order History</Button>
+            </Link>
           </GridCell>
         </Grid>
       </div>

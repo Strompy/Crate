@@ -3,7 +3,7 @@ import { GraphQLInt, GraphQLList } from 'graphql'
 
 // App Imports
 import CrateProductType from './types'
-import { getAll, getByCrate, getProduct, get } from './resolvers'
+import { getAll, getByCrate, getByProduct, get } from './resolvers'
 
 // CrateProducts All
 export const crateProducts = {

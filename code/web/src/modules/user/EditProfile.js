@@ -63,33 +63,24 @@ class EditProfile extends Component {
     })
 
     this.props.messageShow('Saving information, please wait...')
-    
-    //call to back-end to post/update new data (method below does not exist yet)
+  
     this.props.updateProfileInfo(this.state.newProfileData)
-      .then((response) => {
-        this.setState({
-          isLoading: false,
-        })
-        
-        if (this.props.user.error !== '') {
-          this.props.messageShow(this.props.user.error)
-        } else {
-          this.props.messageShow('Information saved successfully.')
-          window.location.href= `${APP_URL}/user/profile`
-        }
-      })
-      .catch((error) => {
+      
+      if (this.props.user.error !== null) {
         this.props.messageShow('There was some error. Please try again.')
-
-        this.setState({
+      } else {
+        this.props.messageShow('Information saved successfully.')
+        .then(
+          window.setTimeout(() => {
+            this.props.messageHide()
+            
+            window.location.href= `${APP_URL}/user/profile`
+        }, 3000))
+        .then(
+          this.setState({
           isLoading: false,
-        })
-      })
-      .then(() => {
-        window.setTimeout(() => {
-          this.props.messageHide()
-        }, 2000)
-      })
+        }))    
+      }
   }
 
   onUpload = (event) => {
@@ -173,7 +164,6 @@ class EditProfile extends Component {
               <H4 font='primary' style={{ marginBottom: '1.13em' }}>Profile Details</H4>
 
               {/* Name */}
-              
               <Input
                 type="text"
                 fullWidth={true}
@@ -187,10 +177,9 @@ class EditProfile extends Component {
               />
 
               {/* Email */}
-              <label htmlFor="email-input" onError="Please, enter a valid email address" />
               <Input
                 id="email-input"
-                pattern="(?!test@test\.com$)[a-z0-9._%+-]{3,}@[a-z]{3,}\.[a-z]{2,}(?:\.[a-z]{2,})?"
+                pattern="(?!email@aol\.com$)[a-z0-9._%+-]{3,}@[a-z]{3,}\.[a-z]{2,}(?:\.[a-z]{2,})?"
                 type="text"
                 fullWidth={true}
                 placeholder="Email"

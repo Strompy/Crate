@@ -17,8 +17,9 @@ import { primary } from '../../ui/common/fonts'
 // App Imports
 import userRoutes from '../../setup/routes/user' 
 import { logout } from './api/actions'
+import { setSubscriptionDate } from '../subscription/api/actions'
 import { APP_URL, APP_URL_API } from '../../setup/config/env'
-import { subscriptions } from '../subscription/api/state'
+
 
 // Component
 class Profile extends Component {
@@ -38,6 +39,7 @@ class Profile extends Component {
 
   updateShipDate = (event) => {
     event.preventDefault()
+    this.props.setSubscriptionDate(this.props.user.details.id, this.state.date)
     //this will be like onSubmit function for editProfile and call new action to update new date 
   }
 
@@ -190,4 +192,4 @@ function profileState(state) {
   }
 }
 
-export default connect(profileState, { logout })(Profile)
+export default connect(profileState, { logout, setSubscriptionDate })(Profile)

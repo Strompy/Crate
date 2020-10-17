@@ -49,6 +49,12 @@ export const subscriptions = (state = subscriptionsInitialState, action) => {
         error: action.error
       }
 
+    case SUBSCRIPTIONS_SET_DATE:
+      return {
+        ...state,
+        date: action.date
+      }
+
     default:
       return state
   }
@@ -125,12 +131,6 @@ export const subscription = (state = subscriptionInitialState, action) => {
         ...state,
         isLoading: false,
         error: action.error
-      }
-
-    case SUBSCRIPTIONS_SET_DATE:
-      return {
-        ...state,
-        date: action.date
       }
 
     default:

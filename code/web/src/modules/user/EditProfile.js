@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 // UI Imports
@@ -52,8 +52,6 @@ class EditProfile extends Component {
     this.setState({ newProfileData })
   }
 
-  // //do we need onChangeSelect? Seems only diff is adding a parseInt so may not need
-
   onSubmit = (event) => {
     event.preventDefault()
 
@@ -77,8 +75,7 @@ class EditProfile extends Component {
           this.props.messageShow(this.props.user.error)
         } else {
           this.props.messageShow('Information saved successfully.')
-          //might need something else here
-          //might need to save image path on user
+          window.location.href= `${APP_URL}/user/profile`
         }
       })
       .catch((error) => {
@@ -91,7 +88,7 @@ class EditProfile extends Component {
       .then(() => {
         window.setTimeout(() => {
           this.props.messageHide()
-        }, 5000)
+        }, 2000)
       })
   }
 
@@ -120,6 +117,8 @@ class EditProfile extends Component {
           this.setState({
             newProfileData
           })
+         
+          
 
         } else {
           this.props.messageShow('Please try again.')
@@ -135,6 +134,7 @@ class EditProfile extends Component {
 
         window.setTimeout(() => {
           this.props.messageHide()
+          
         }, 5000)
       })
   }
@@ -277,7 +277,7 @@ class EditProfile extends Component {
 
               {/* Zip code */}
               <Input
-                type="text"
+                type="number"
                 fullWidth={true}
                 placeholder='Zip code'
                 required="required"

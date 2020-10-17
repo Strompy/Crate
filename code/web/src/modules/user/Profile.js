@@ -63,6 +63,7 @@ const Profile = ({ user, logout }) => {
               height: "24em",
               boxShadow: level1,
               borderRadius: "10px",
+              maxWidth: "250px",
             }}
           />
           <H4>{details.name}</H4>

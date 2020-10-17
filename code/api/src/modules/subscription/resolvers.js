@@ -51,6 +51,20 @@ export async function create(parentValue, { crateId }, { auth }) {
   }
 }
 
+// Update subscription date
+export async function update(parentValue, { id, date }, { auth }) {
+  if(auth.user && auth.user.id > 0) {
+    return await models.Subscription.update(
+      {
+        date
+      },
+      { where: { id } }
+    )
+  } else {
+    throw new Error('Operation denied.')
+  }
+}
+
 // Delete subscription
 export async function remove(parentValue, { id }, { auth }) {
   if(auth.user && auth.user.id > 0) {

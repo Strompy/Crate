@@ -11,6 +11,8 @@ export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
+export const UPDATE_USER = 'AUTH/UPDATE_USER'
+export const SET_ERROR = 'AUTH/SET_ERROR'
 
 // Actions
 
@@ -36,7 +38,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {name, email, role, bio, image, street, city, state, zip}', 'token']
+      fields: ['user {name, email, role, bio, image, street, city, state, zip, id}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -63,6 +65,37 @@ export function login(userCredentials, isLoading = true) {
           error: 'Please try again'
         })
       })
+  }
+}
+
+export function updateProfileInfo(newProfileData) {
+  return dispatch => {
+
+    return axios.post(routeApi, mutation({
+      operation: 'userUpdate',
+      variables: newProfileData,
+      fields: ['id', 'name', 'email', 'bio', 'street', 'city', 'state', 'zip', 'image']
+    }))
+    .then(response => {
+      let error = ''
+
+      if (response.data.errors && response.data.errors.length > 0) {
+        error = response.data.errors[0].message
+      } else {
+        dispatch({
+          type: UPDATE_USER,
+          newProfileData
+        })
+
+        window.localStorage.setItem('user', JSON.stringify(newProfileData)) 
+      }
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_ERROR,
+        error
+      })
+    })
   }
 }
 

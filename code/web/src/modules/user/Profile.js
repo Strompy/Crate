@@ -12,6 +12,7 @@ import Button from '../../ui/button'
 import { grey, grey2, secondary } from '../../ui/common/colors'
 import { level1 } from '../../ui/common/shadows'
 import Input from '../../ui/input/Input'
+import { primary } from '../../ui/common/fonts'
 
 // App Imports
 import userRoutes from '../../setup/routes/user' 
@@ -136,15 +137,19 @@ class Profile extends Component {
               <H5 style={{ color: "black", marginBottom: "0.5em" }}>
                 Your next crate will ship on:
               </H5>
-              <H6 style={{ color: secondary, marginBottom: "1em" }}>
+              <H6 style={{ color: secondary, marginBottom: "2em", fontSize: '1.4em' }}>
                 November 13, 2020
+              </H6>
+              <H6 style={{ color: "black", marginBottom: "0.5em" }}>
+                Change Next Shipment Date: 
               </H6>
               <Input 
                 type="date"
                 value={this.state.date}
                 onChange={this.onChange}
+                style={{ border: '1px solid grey', background: '#ffff', marginBottom: '1em', fontFamily: primary, padding: '0.3em', boxShadow: level1, borderRadius: "10px"}}
               />
-              <Button theme="primary">Edit Ship Date</Button>
+              <Button theme="primary">Submit</Button>
             </div>
 
             <img

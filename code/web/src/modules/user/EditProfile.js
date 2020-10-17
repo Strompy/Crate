@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 // UI Imports
@@ -16,7 +16,7 @@ import { level1 } from '../../ui/common/shadows'
 import { primary } from '../../ui/common/fonts'
 
 // App Imports
-// import admin from '../../../setup/routes/admin'
+import userRoutes from '../../setup/routes/user' 
 import { routeImage } from '../../setup/routes'
 import { renderIf, slug } from '../../setup/helpers'
 import { logout, updateProfileInfo } from './api/actions'
@@ -31,6 +31,7 @@ class EditProfile extends Component {
 
     this.state = {
       isLoading: false, 
+      submitted: false,
       newProfileData: {
         name: this.props.user.details.name || "",
         email: this.props.user.details.email || "",
@@ -66,7 +67,7 @@ class EditProfile extends Component {
   
     this.props.updateProfileInfo(this.state.newProfileData)
       
-      if (this.props.user.error !== null || this.props.user.error !== '') {
+      if (this.props.user.error !== null && this.props.user.error !== '') {
         this.props.messageShow('There was some error. Please try again.')
         // .then(
         window.setTimeout(() => {
@@ -78,8 +79,6 @@ class EditProfile extends Component {
         // .then(
         window.setTimeout(() => {
           this.props.messageHide()
-          
-          window.location.href= `${APP_URL}/user/profile`
       }, 3000)
         // .then(
         this.setState({
@@ -134,6 +133,9 @@ class EditProfile extends Component {
   }
 
   render() {
+    if (this.state.submitted) {
+      return <Redirect to={userRoutes.profile.path} />
+    }
     return (
       <div>
         {/* SEO */}
@@ -152,7 +154,12 @@ class EditProfile extends Component {
           </GridCell>
         </Grid>
         
-        <form onSubmit={this.onSubmit}
+        <form onSubmit={(event) => {
+          this.onSubmit(event)
+          this.setState({submitted: true})
+          
+          
+          }}
           style={{
           backgroundColor: grey,
           borderRadius: '10px',

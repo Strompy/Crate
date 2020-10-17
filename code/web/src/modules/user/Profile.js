@@ -37,6 +37,14 @@ class Profile extends Component {
     this.setState({ date })
   }
 
+  formatDate(date) {
+    date = date.split('-')
+    date.push(date.shift())
+    if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
+    if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
+    return date.join('/')
+  }
+
   updateShipDate = (event) => {
     event.preventDefault()
     this.props.setSubscriptionDate(this.props.user.details.id, this.state.date)
@@ -149,7 +157,7 @@ class Profile extends Component {
                 Your next crate will ship on:
               </H5>
               <H6 style={{ color: secondary, marginBottom: "2em", fontSize: '1.4em' }}>
-                { this.props.subscriptions.date ? this.props.subscriptions.date : 'No Date Selected'}
+                { this.props.subscriptions.date ? this.formatDate(this.props.subscriptions.date): 'No Date Selected'}
               </H6>
               <H6 style={{ color: "black", marginBottom: "0.5em" }}>
                 Change Next Shipment Date: 

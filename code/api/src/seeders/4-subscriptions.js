@@ -6,7 +6,7 @@ module.exports = {
       {
         crateId: 3,
         userId: 2,
-        date: "1602954879",
+        date: "10-17-2020",
         createdAt: new Date(),
         updatedAt: new Date()
       }

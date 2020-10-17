@@ -11,6 +11,7 @@ import { H3, H4, H5, H6 } from '../../ui/typography'
 import Button from '../../ui/button'
 import { grey, grey2, secondary } from '../../ui/common/colors'
 import { level1 } from '../../ui/common/shadows'
+import Input from '../../ui/input/Input'
 
 // App Imports
 import userRoutes from '../../setup/routes/user' 
@@ -25,6 +26,11 @@ class Profile extends Component {
     this.state = {
       date: ''
     }
+  }
+
+  onChange = (event) => {
+    const date = event.target.value
+    this.setState({ date })
   }
 
   render() {
@@ -133,6 +139,11 @@ class Profile extends Component {
               <H6 style={{ color: secondary, marginBottom: "1em" }}>
                 November 13, 2020
               </H6>
+              <Input 
+                type="date"
+                value={this.state.date}
+                onChange={this.onChange}
+              />
               <Button theme="primary">Edit Ship Date</Button>
             </div>
 

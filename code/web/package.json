@@ -29,7 +29,9 @@
     "@storybook/react": "^6.0.26",
     "babel-loader": "8.1.0",
     "dotenv-webpack": "^1.7.0",
+    "fetch-mock": "^9.10.7",
     "nodemon": "2.0.3",
+    "redux-mock-store": "^1.5.4",
     "webpack": "4.42.1",
     "webpack-cli": "3.3.11"
   },

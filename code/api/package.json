@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch --runInBand --detectOpenHandles",
     "setup": "npm run setup:install && npm run setup:db",
     "setup:install": "npm install",
     "setup:db": "npm run db:migrate && npm run db:seed",

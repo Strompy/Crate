@@ -173,6 +173,7 @@ class EditProfile extends Component {
               <H4 font='primary' style={{ marginBottom: '1.13em' }}>Profile Details</H4>
 
               {/* Name */}
+              
               <Input
                 type="text"
                 fullWidth={true}
@@ -186,7 +187,10 @@ class EditProfile extends Component {
               />
 
               {/* Email */}
+              <label htmlFor="email-input" onError="Please, enter a valid email address" />
               <Input
+                id="email-input"
+                pattern="(?!test@test\.com$)[a-z0-9._%+-]{3,}@[a-z]{3,}\.[a-z]{2,}(?:\.[a-z]{2,})?"
                 type="text"
                 fullWidth={true}
                 placeholder="Email"
@@ -277,7 +281,8 @@ class EditProfile extends Component {
 
               {/* Zip code */}
               <Input
-                type="number"
+                type="text"
+                pattern="^\d{5}(?:[-\s]\d{4})?$"
                 fullWidth={true}
                 placeholder='Zip code'
                 required="required"

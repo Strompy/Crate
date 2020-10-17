@@ -57,15 +57,17 @@ const Profile = ({ user, logout }) => {
       <Grid>
         <GridCell style={{ padding: "2em", textAlign: "center" }}>
           <img
-            src={details.image ? `${APP_URL_API}/images/uploads/${details.image}` : `${APP_URL}//images/stock/men/4.jpg`}
+            src={(details.image !== null) ?`${APP_URL_API}/images/uploads/${details.image}` : `${APP_URL}/images/stock/men/4.jpg` }
             style={{
               marginBottom: "2em",
               height: "24em",
               boxShadow: level1,
               borderRadius: "10px",
+              maxWidth: "250px",
             }}
           />
-          <H4>{details.name}</H4>
+          <H4 style={{textTransform: "capitalize"}}>{details.name}</H4>
+
         </GridCell>
 
         <GridCell style={{ padding: "2em", textAlign: "center" }}>

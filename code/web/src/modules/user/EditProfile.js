@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 // UI Imports
@@ -32,8 +32,8 @@ class EditProfile extends Component {
     this.state = {
       isLoading: false, 
       newProfileData: {
-        name: '',
-        email: '',
+        name: this.props.user.details.name || "",
+        email: this.props.user.details.email || "",
         bio: '',
         street: '',
         city: '',
@@ -52,8 +52,6 @@ class EditProfile extends Component {
     this.setState({ newProfileData })
   }
 
-  // //do we need onChangeSelect? Seems only diff is adding a parseInt so may not need
-
   onSubmit = (event) => {
     event.preventDefault()
 
@@ -65,34 +63,29 @@ class EditProfile extends Component {
     })
 
     this.props.messageShow('Saving information, please wait...')
-    
-    //call to back-end to post/update new data (method below does not exist yet)
+  
     this.props.updateProfileInfo(this.state.newProfileData)
-      .then((response) => {
-        this.setState({
-          isLoading: false,
-        })
-        
-        if (this.props.user.error !== '') {
-          this.props.messageShow(this.props.user.error)
-        } else {
-          this.props.messageShow('Information saved successfully.')
-          //might need something else here
-          //might need to save image path on user
-        }
-      })
-      .catch((error) => {
+      
+      if (this.props.user.error !== null || this.props.user.error !== '') {
         this.props.messageShow('There was some error. Please try again.')
+        .then(
+          window.setTimeout(() => {
+            this.props.messageHide()
+          }, 3000))
 
-        this.setState({
+      } else {
+        this.props.messageShow('Information saved successfully.')
+        .then(
+          window.setTimeout(() => {
+            this.props.messageHide()
+            
+            window.location.href= `${APP_URL}/user/profile`
+        }, 3000))
+        .then(
+          this.setState({
           isLoading: false,
-        })
-      })
-      .then(() => {
-        window.setTimeout(() => {
-          this.props.messageHide()
-        }, 5000)
-      })
+        }))    
+      }
   }
 
   onUpload = (event) => {
@@ -120,7 +113,7 @@ class EditProfile extends Component {
           this.setState({
             newProfileData
           })
-
+         
         } else {
           this.props.messageShow('Please try again.')
         }
@@ -135,6 +128,7 @@ class EditProfile extends Component {
 
         window.setTimeout(() => {
           this.props.messageHide()
+          
         }, 5000)
       })
   }
@@ -187,6 +181,8 @@ class EditProfile extends Component {
 
               {/* Email */}
               <Input
+                id="email-input"
+                pattern="(?!email@aol\.com$)[a-z0-9._%+-]{3,}@[a-z]{3,}\.[a-z]{2,}(?:\.[a-z]{2,})?"
                 type="text"
                 fullWidth={true}
                 placeholder="Email"
@@ -278,6 +274,7 @@ class EditProfile extends Component {
               {/* Zip code */}
               <Input
                 type="text"
+                pattern="^\d{5}(?:[-\s]\d{4})?$"
                 fullWidth={true}
                 placeholder='Zip code'
                 required="required"

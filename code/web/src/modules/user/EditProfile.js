@@ -18,10 +18,9 @@ import { primary } from '../../ui/common/fonts'
 // App Imports
 import userRoutes from '../../setup/routes/user' 
 import { routeImage } from '../../setup/routes'
-import { renderIf, slug } from '../../setup/helpers'
+import { renderIf } from '../../setup/helpers'
 import { logout, updateProfileInfo } from './api/actions'
 import { upload, messageShow, messageHide } from '../common/api/actions'
-import { APP_URL } from '../../setup/config/env'
 import { statesList } from './helperData/statesList'
 
 // Component
@@ -67,24 +66,24 @@ class EditProfile extends Component {
   
     this.props.updateProfileInfo(this.state.newProfileData)
       
-      if (this.props.user.error !== null && this.props.user.error !== '') {
-        this.props.messageShow('There was some error. Please try again.')
-        // .then(
-        window.setTimeout(() => {
-          this.props.messageHide()
-        }, 3000)
+    if (this.props.user.error !== null && this.props.user.error !== '') {
+      this.props.messageShow('There was some error. Please try again.')
 
-      } else {
-        this.props.messageShow('Information saved successfully.')
-        // .then(
-        window.setTimeout(() => {
-          this.props.messageHide()
+      window.setTimeout(() => {
+        this.props.messageHide()
       }, 3000)
-        // .then(
-        this.setState({
-        isLoading: false,
-        })    
-      }
+
+    } else {
+      this.props.messageShow('Information saved successfully.')
+
+      window.setTimeout(() => {
+        this.props.messageHide()
+      }, 3000)
+
+      this.setState({
+      isLoading: false,
+      })    
+    }
   }
 
   onUpload = (event) => {
@@ -127,7 +126,6 @@ class EditProfile extends Component {
 
         window.setTimeout(() => {
           this.props.messageHide()
-          
         }, 5000)
       })
   }
@@ -157,8 +155,6 @@ class EditProfile extends Component {
         <form onSubmit={(event) => {
           this.onSubmit(event)
           this.setState({submitted: true})
-          
-          
           }}
           style={{
           backgroundColor: grey,
@@ -299,9 +295,6 @@ class EditProfile extends Component {
             </GridCell>
           </Grid>
         </form>
-
-        {/* Profile Info Edit form */}
-
       </div>     
     )
   }
@@ -320,6 +313,15 @@ function editProfileState(state) {
   };
 }
 
-export default withRouter(connect(editProfileState, { logout, messageShow, messageHide, upload, updateProfileInfo })(EditProfile))
+export default withRouter(
+  connect(
+    editProfileState, { 
+      logout,
+      messageShow, 
+      messageHide,
+      upload,
+      updateProfileInfo 
+    }
+  )(EditProfile))
 
 

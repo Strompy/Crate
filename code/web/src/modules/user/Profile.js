@@ -48,16 +48,10 @@ class Profile extends Component {
   updateShipDate = (event) => {
     event.preventDefault()
     this.props.setSubscriptionDate(this.props.user.details.id, this.state.date)
-    //this will be like onSubmit function for editProfile and call new action to update new date 
   }
 
   render() {
-    const {
-      user,
-      logout,
-      user: { details }
-    } = this.props
-
+    const {logout, user: { details }} = this.props
     return (
       <div>
         {/* SEO */}
@@ -94,7 +88,7 @@ class Profile extends Component {
         <Grid>
           <GridCell style={{ padding: "2em", textAlign: "center" }}>
             <img
-              src={details.image ? `${APP_URL_API}/images/uploads/${details.image}`: `${APP_URL}/images/stock/men/4.jpg`}
+              src={details.image ? `${APP_URL_API}/images/uploads/${details.image}` : `${APP_URL}/images/stock/men/4.jpg`}
               style={{
                 marginBottom: "2em",
                 height: "24em",
@@ -156,11 +150,11 @@ class Profile extends Component {
               <H5 style={{ color: "black", marginBottom: "0.5em" }}>
                 Your next crate will ship on:
               </H5>
-              <H6 style={{ color: secondary, marginBottom: "2em", fontSize: '1.4em' }}>
-                { this.props.subscriptions.date ? this.formatDate(this.props.subscriptions.date): 'No Date Selected'}
+              <H6 style={{ color: secondary, marginBottom: ".5em", fontSize: '1.4em' }}>
+                { this.props.subscriptions.date ? this.formatDate(this.props.subscriptions.date) : 'No Date Selected'}
               </H6>
               <H6 style={{ color: "black", marginBottom: "0.5em" }}>
-                Change Next Shipment Date: 
+                Change Shipment Date: 
               </H6>
              
               <Input 
@@ -174,7 +168,7 @@ class Profile extends Component {
 
             <img
               src={`${APP_URL}/images/crate.png`}
-              style={{ height: "12em", display: "block", margin: "2.4em auto 1em" }}
+              style={{ height: "8em", display: "block", margin: "2.4em auto 1em" }}
             />
             <Link to={userRoutes.orderHistory.path}>
               <Button theme="primary">View Order History</Button>

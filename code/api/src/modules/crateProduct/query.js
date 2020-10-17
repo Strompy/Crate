@@ -14,12 +14,18 @@ export const crateProducts = {
 // CrateProducts by crate
 export const crateProductsByCrate = {
   type: new GraphQLList(CrateProductType),
+  args: {
+    crateId: { type: GraphQLInt }
+  },
   resolve: getByCrate
 }
 
 // CrateProducts by product
 export const crateProductsByProduct = {
   type: new GraphQLList(CrateProductType),
+  args: {
+    productId: { type: GraphQLInt }
+  },
   resolve: getByProduct
 }
 

@@ -1,4 +1,5 @@
 // App Imports
+import params from '../../config/params'
 import models from '../../setup/models'
 
 // Get CrateProduct by ID
@@ -14,31 +15,31 @@ export async function get(parentValue, { id }) {
 
 // Get CrateProduct by crate
 export async function getByCrate (parentValue, { crateId }) {
-    return await models.Subscription.findAll({
-      where: {
-        crateId: crateId
-      },
-      include: [
-        {model: models.Product, as: 'product'},
-        {model: models.Crate, as: 'crate'},
-      ]
-    })
-  }
+  return await models.CrateProduct.findAll({
+    where: {
+      crateId: crateId
+    },
+    include: [
+      {model: models.Product, as: 'product'},
+      {model: models.Crate, as: 'crate'},
+    ]
+  })
 }
 
+
 // Get CrateProduct by product
-export async function getByProduct (parentValue, { productId }) {
-    return await models.Subscription.findAll({
-      where: {
-        productId: productId
-      },
-      include: [
-        {model: models.Product, as: 'product'},
-        {model: models.Crate, as: 'crate'},
-      ]
-    })
-  }
+export async function getByProduct(parentValue, { productId }) {
+  return await models.CrateProduct.findAll({
+    where: {
+      productId: productId
+    },
+    include: [
+      {model: models.Product, as: 'product'},
+      {model: models.Crate, as: 'crate'},
+    ]
+  })
 }
+
 
 // Get all crateProducts
 export async function getAll() {

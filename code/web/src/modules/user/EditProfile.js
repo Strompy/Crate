@@ -66,8 +66,13 @@ class EditProfile extends Component {
   
     this.props.updateProfileInfo(this.state.newProfileData)
       
-      if (this.props.user.error !== null) {
+      if (this.props.user.error !== null || this.props.user.error !== '') {
         this.props.messageShow('There was some error. Please try again.')
+        .then(
+          window.setTimeout(() => {
+            this.props.messageHide()
+          }, 3000))
+
       } else {
         this.props.messageShow('Information saved successfully.')
         .then(
@@ -109,8 +114,6 @@ class EditProfile extends Component {
             newProfileData
           })
          
-          
-
         } else {
           this.props.messageShow('Please try again.')
         }

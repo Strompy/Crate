@@ -3,7 +3,7 @@ import { GraphQLInt } from 'graphql'
 
 // App Imports
 import SubscriptionType from './types'
-import { create, remove } from './resolvers'
+import { create, update, remove } from './resolvers'
 
 // Subscription create
 export const subscriptionCreate = {
@@ -15,6 +15,22 @@ export const subscriptionCreate = {
     }
   },
   resolve: create
+}
+
+// Subscription date update
+export const subscriptionDateUpdate = {
+  type: SubscriptionType,
+  args: {
+    id: {
+      name: 'id',
+      type: GraphQLInt
+    },
+    date: {
+      name: 'date',
+      type: GraphQLString
+    }
+  },
+  resolve: update
 }
 
 // Subscription remove
